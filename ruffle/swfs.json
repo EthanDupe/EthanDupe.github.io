@@ -85,6 +85,13 @@
        "type": "Game"
     },
     {
+      "location": "swfs/pillow.swf",
+      "title": "Mickey Friends Pillow Fight",
+      "author": "KBasic16",
+      "authorLink": "https://www.newgrounds.com",
+      "type": "Game"
+    },
+    {
       "location": "swfs/doom-1.swf",
       "title": "DOOM",
       "author": "Id Software / Newgrounds",
