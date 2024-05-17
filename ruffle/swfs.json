@@ -92,6 +92,27 @@
       "type": "Game"
     },
     {
+      "location": "swfs/vex.swf",
+      "title": "Vex 1",
+      "author": "Unknown?",
+      "authorLink": "unknoen",
+      "type": "Game"
+    },
+    {
+      "location": "swfs/vex2.swf",
+      "title": "Vex 2",
+      "author": "Unknown?",
+      "authorLink": "unknoen",
+      "type": "Game"
+    },
+    {
+      "location": "swfs/vex3.swf",
+      "title": "Vex 3",
+      "author": "Unknown?",
+      "authorLink": "unknoen",
+      "type": "Game"
+    },
+    {
       "location": "swfs/doom-1.swf",
       "title": "DOOM",
       "author": "Id Software / Newgrounds",
