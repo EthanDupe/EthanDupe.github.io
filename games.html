@@ -1,0 +1,67 @@
+<html>
+
+	<title>Games</title>
+	<style>
+	.button {
+		border: none;
+		outline: none;
+		background: none;
+		color: rgb(255, 255, 255);
+		background-color: transparent;
+		box-shadow: none;
+    }
+	
+body {
+  background-color: #000000
+  
+}
+	</style>
+	<button onclick = redirc("./games/Minecraft_1.8.html") class="button"> 
+	<img src="./assets/img/minecraft_grass_block.jpg" alt="buttonpng" border='0' width="275" height="280" />
+	<br>
+	Minecraft 1.8.8
+	</button>
+	<button onclick = redirc("./games/slope.htm" class="button">
+	<img src="./assets/img/slope.jpg" alt="buttonpng" border='0' width="275" height="280" />
+	<br>
+	Slope
+	</button>
+	<button onclick = redirc("./games/tetris.html") class="button">
+	<img src="./assets/img/tetris.jpg" alt="buttonpng" border='0' width="275" height="280" />
+	<br>
+	Tetris
+
+	</button>
+
+	<button onclick = redirc('./games/Territorial_io_MP.html')  class="button"> 
+	<img src="./assets/img/Territorial.jpg" alt="buttonpng" border='0' width="275" height="280" />
+	<br>
+	Territorial.io (multiplayer compatible)
+	</button>
+	<button onclick=redirc("./games/2048.html")  class="button">
+	<img src="./assets/img/2048.png" alt="buttonpng" border='0' width="275" height="280"/>
+	<br>
+	2048
+	</button>
+	<button onclick=redirc("./games/Minecraft_1.12.2.html")  class="button">
+	<img src="./assets/img/minecraft_grass_block.jpg" border = "0" width = '275' height = '280'>
+	<br>
+	Minecraft 1.12.2
+	</button>
+	<button onclick="redirc('./games/TerrariaMP.html')"  class="button">
+	<img src="./assets/img/Terraria.bmp" border="0" width = '275' height="280">
+	<br>
+	Terraria (Multiplayer)
+	</button>
+	<button onclick="redirc('./games/Terraria.html')"  class="button">
+	<img src="./assets/img/Terraria.bmp" border="0" width = '275' height="280">
+	<br>
+	Terraria (Singleplayer)
+	</button>
+	<script>
+	function redirc(path) {
+		location.href = path
+	}
+	</script>
+	<script src = './assets/exploitscripts.js'></script>
+</html>
