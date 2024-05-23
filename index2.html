@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthanDupe x RCKSTR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #008cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005f6b;
+        }
+        .popular {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        /* Light Mode */
+        .light-mode {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .light-mode h1 {
+            color: #333;
+        }
+        .light-mode .popular {
+            color: #e74c3c;
+        }
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+        .dark-mode h1 {
+            color: #f4f4f4;
+        }
+        .dark-mode .popular {
+            color: #e74c3c;
+        }
+        .dark-mode button {
+            background-color: #555;
+            color: #f4f4f4;
+        }
+        .dark-mode button:hover {
+            background-color: #777;
+        }
+        /* Blue Mode */
+        .blue-mode {
+            background-color: #e0f7fa;
+            color: #00796b;
+        }
+        .blue-mode h1 {
+            color: #00796b;
+        }
+        .blue-mode .popular {
+            color: #00796b;
+        }
+        .blue-mode button {
+            background-color: #00796b;
+            color: white;
+        }
+        .blue-mode button:hover {
+            background-color: #004d40;
+        }
+        #color-mode {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #008cba;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #color-mode:hover {
+            background-color: #005f6b;
+        }
+    </style>
+    <script>
+        function Redirc(url) {
+            window.location.href = url;
+        }
+
+        function changeColorMode() {
+            const mode = document.getElementById('color-mode').value;
+            document.body.className = mode;
+        }
+    </script>
+</head>
+<body class="light-mode">
+    <select id="color-mode" onchange="changeColorMode()">
+        <option value="light-mode">Light Mode</option>
+        <option value="dark-mode">Dark Mode</option>
+        <option value="blue-mode">Blue Mode</option>
+    </select>
+    <h1>EthanDupe x RCKSTR</h1>
+    <h2>Welcome!</h2>
+    <div>
+        <button onclick="Redirc('./proxy/index.html')">Proxy</button>
+        <button onclick="Redirc('./games.html')">Games</button>
+    </div>
+    <div>
+        <p class="popular">Popular 🔥</p>
+        <button onclick="Redirc('./chat/index.html')">Chat</button>
+        <button onclick="Redirc('./3kh0/index.html')">3kh0</button>
+    </div>
+</body>
+</html>
