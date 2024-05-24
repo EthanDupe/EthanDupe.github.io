@@ -1,82 +1,134 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <style>
+        .button {
+            border: none;
+            outline: none;
+            background: none;
+            color: #fff;
+            background-color: transparent;
+            box-shadow: none;
+        }
+        
+        body {
+            background-color: #151515;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
 
-	<title>Games</title>
-	<style>
-	.button {
-		border: none;
-		outline: none;
-		background: none;
-		color: rgb(255, 255, 255);
-		background-color: transparent;
-		box-shadow: none;
-    }
-	
-body {
-  background-color: #151515
-  
-}
-	</style>
-	<button onclick = redirc("./games/Minecraft_1.8.html") class="button"> 
-	<img src="./assets/img/minecraft_grass_block.jpg" alt="buttonpng" border='0' width="275" height="280" />
-	<br>
-	Minecraft 1.8.8
-	</button>
-	<button onclick = redirc("./games/slope.htm" class="button">
-	<img src="./assets/img/slope.jpg" alt="buttonpng" border='0' width="275" height="280" />
-	<br>
-	Slope
-	</button>
-	<button onclick = redirc("./games/tetris.html") class="button">
-	<img src="./assets/img/tetris.jpg" alt="buttonpng" border='0' width="275" height="280" />
-	<br>
-	Tetris
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-	</button>
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+        }
 
-	<button onclick = redirc('./games/Territorial_io_MP.html')  class="button"> 
-	<img src="./assets/img/Territorial.jpg" alt="buttonpng" border='0' width="275" height="280" />
-	<br>
-	Territorial.io (multiplayer compatible)
-	<br>
-	‎ ‎ 
-	</button>
-	<button onclick=redirc("./games/2048.html")  class="button">
-	<img src="./assets/img/2048.png" alt="buttonpng" border='0' width="275" height="280"/>
-	<br>
-	2048
-	<br>
-	</button>
-	<button onclick=redirc("./games/Minecraft_1.12.2.html")  class="button">
-	<img src="./assets/img/minecraft_grass_block.jpg" border = "0" width = '275' height = '280'>
-	<br>
-	Minecraft 1.12.2
-	<br>
+        .theme-switcher {
+            margin-left: auto;
+        }
 
-	</button>
-	<button onclick="redirc('./games/TerrariaMP.html')"  class="button">
-	<img src="./assets/img/Terraria.bmp" border="0" width = '275' height="280">
-	<br>
-	Terraria (Multiplayer)
-	<br>
+        .theme-switcher select {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <input type="text" class="search-bar" placeholder="Search...">
+        <div class="theme-switcher">
+            <label for="theme">Theme: </label>
+            <select id="theme" onchange="switchTheme(this.value)">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="blue">Blue</option>
+            </select>
+        </div>
+    </div>
+    
+    <button onclick="redirc('./games/Minecraft_1.8.html')" class="button"> 
+        <img src="./assets/img/minecraft_grass_block.jpg" alt="buttonpng" border='0' width="275" height="280" />
+        <br>
+        Minecraft 1.8.8
+    </button>
+    <button onclick="redirc('./games/slope.htm')" class="button">
+        <img src="./assets/img/slope.jpg" alt="buttonpng" border='0' width="275" height="280" />
+        <br>
+        Slope
+    </button>
+    <button onclick="redirc('./games/tetris.html')" class="button">
+        <img src="./assets/img/tetris.jpg" alt="buttonpng" border='0' width="275" height="280" />
+        <br>
+        Tetris
+    </button>
+    <button onclick="redirc('./games/Territorial_io_MP.html')" class="button"> 
+        <img src="./assets/img/Territorial.jpg" alt="buttonpng" border='0' width="275" height="280" />
+        <br>
+        Territorial.io (multiplayer compatible)
+        <br>
+        ‎ ‎ 
+    </button>
+    <button onclick="redirc('./games/2048.html')" class="button">
+        <img src="./assets/img/2048.png" alt="buttonpng" border='0' width="275" height="280"/>
+        <br>
+        2048
+        <br>
+    </button>
+    <button onclick="redirc('./games/Minecraft_1.12.2.html')" class="button">
+        <img src="./assets/img/minecraft_grass_block.jpg" border="0" width="275" height="280">
+        <br>
+        Minecraft 1.12.2
+        <br>
+    </button>
+    <button onclick="redirc('./games/TerrariaMP.html')" class="button">
+        <img src="./assets/img/Terraria.bmp" border="0" width="275" height="280">
+        <br>
+        Terraria (Multiplayer)
+        <br>
+    </button>
+    <button onclick="redirc('./games/Terraria.html')" class="button">
+        <img src="./assets/img/Terraria.bmp" border="0" width="275" height="280">
+        <br>
+        Terraria (Singleplayer)
+        <br>
+    </button>
+    <button onclick="redirc('./games/Cookie_clicker/index.html')" class="button">
+        <img src="./assets/img/cookieclicker.jpg" border="0" width="275" height="280">
+        <br>
+        Cookie clicker
+        <br>
+        ‎ ‎ ‎  <!--There are invisible characters here. They are needed. Do not delete them or it WILL mess up the CSS-->
+    </button>
 
-	</button>
-	<button onclick="redirc('./games/Terraria.html')"  class="button">
-	<img src="./assets/img/Terraria.bmp" border="0" width = '275' height="280">
-	<br>
-	Terraria (Singleplayer)
-	<br>
+    <script>
+        function redirc(path) {
+            location.href = path;
+        }
 
-	</button>
-	<button onclick="redirc('./games/Cookie_clicker/index.html')" class = "button">
-	<img src="./assets/img/cookieclicker.jpg" border="0" width="275" height="280">
-	<br>
-	Cookie clicker
-	<br>
-	‎ ‎ ‎  <!--There are invisible charachters here. They are needed. Do not delete them or it WILL fuck up the CSS-->
-	<script>
-	function redirc(path) {
-		location.href = path
-	}
-	</script>
-	<script src = './assets/exploitscripts.js'></script>
+        function switchTheme(theme) {
+            const body = document.body;
+            if (theme === 'light') {
+                body.style.backgroundColor = '#fff';
+                body.style.color = '#000';
+            } else if (theme === 'dark') {
+                body.style.backgroundColor = '#151515';
+                body.style.color = '#fff';
+            } else if (theme === 'blue') {
+                body.style.backgroundColor = '#001f3f';
+                body.style.color = '#fff';
+            }
+        }
+    </script>
+    <script src='./assets/exploitscripts.js'></script>
+</body>
 </html>
