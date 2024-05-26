@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1, h2, p, div > a {
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        h1:hover, h2:hover, p:hover, div > a:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+        button {
+            background-color: #008cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #005f6b;
+        }
+        .mode-switcher {
+            margin: 20px 0;
+        }
+        .mode-switcher select {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #008cba;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .mode-switcher select:hover {
+            background-color: #005f6b;
+        }
+    </style>
+    <script>
+        function changeColorMode() {
+            const mode = document.getElementById('color-mode').value;
+            document.body.className = mode;
+            localStorage.setItem('theme', mode);
+        }
+
+        // Set default theme to previously saved theme
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
+            document.body.classList.add(savedTheme);
+            document.getElementById('color-mode').value = savedTheme;
+        });
+    </script>
+</head>
+<body>
+    <h1>Settings</h1>
+    <div class="mode-switcher">
+        <label for="color-mode">Choose Theme:</label>
+        <select id="color-mode" onchange="changeColorMode()">
+            <option value="dark-mode">Dark Mode</option>
+            <option value="light-mode">Light Mode</option>
+            <option value="blue-mode">Blue Mode</option>
+            <option value="green-mode">Green Mode</option>
+            <option value="red-mode">Red Mode</option>
+            <option value="purple-mode">Purple Mode</option>
+            <option value="orange-mode">Orange Mode</option>
+            <option value="pink-mode">Pink Mode</option>
+            <option value="yellow-mode">Yellow Mode</option>
+            <option value="brown-mode">Brown Mode</option>
+            <option value="grey-mode">Grey Mode</option>
+        </select>
+    </div>
+    <div>
+        <button onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+</body>
+</html>
