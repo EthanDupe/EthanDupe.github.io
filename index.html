@@ -26,37 +26,34 @@
         }
         h1, h2, p, div > a {
             margin-bottom: 20px;
-            display: inline-block;
-            transition: transform 0.3s;
-        }
-        h1:hover, h2:hover, p:hover, div > a:hover {
-            transform: scale(1.05) rotate(1deg);
+            display: block;
         }
         button {
             background-color: #008cba;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             margin: 10px;
             cursor: pointer;
-            border-radius: 10px;
-            transition: background-color 0.3s, transform 0.2s;
+            border-radius: 50px;
+            transition: background-color 0.3s, box-shadow 0.3s;
             font-size: 1em;
         }
         button:hover {
             background-color: #005f6b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .popular {
             font-size: 1.2em;
             font-weight: bold;
             color: #e74c3c;
         }
-        .mode-switcher {
+        .settings-button {
             position: absolute;
             top: 20px;
             right: 20px;
         }
-        .mode-switcher select {
+        .settings-button button {
             padding: 10px;
             border-radius: 10px;
             border: none;
@@ -65,7 +62,7 @@
             color: white;
             transition: background-color 0.3s;
         }
-        .mode-switcher select:hover {
+        .settings-button button:hover {
             background-color: #005f6b;
         }
         /* Light Mode */
@@ -122,142 +119,142 @@
         .blue-mode button:hover {
             background-color: #004d40;
         }
-        /* Additional Modes */
+        /* Additional Color Modes */
         .green-mode {
-            background-color: #e8f5e9;
-            color: #2e7d32;
+            background-color: #d0f0c0;
+            color: #006400;
         }
         .green-mode h1, .green-mode h2 {
-            color: #2e7d32;
+            color: #006400;
         }
         .green-mode .popular {
-            color: #2e7d32;
+            color: #006400;
         }
         .green-mode button {
-            background-color: #2e7d32;
+            background-color: #006400;
             color: white;
         }
         .green-mode button:hover {
-            background-color: #1b5e20;
+            background-color: #004d00;
         }
         .red-mode {
-            background-color: #ffebee;
-            color: #c62828;
+            background-color: #f8d7da;
+            color: #721c24;
         }
         .red-mode h1, .red-mode h2 {
-            color: #c62828;
+            color: #721c24;
         }
         .red-mode .popular {
-            color: #c62828;
+            color: #721c24;
         }
         .red-mode button {
-            background-color: #c62828;
+            background-color: #721c24;
             color: white;
         }
         .red-mode button:hover {
-            background-color: #8e0000;
+            background-color: #501217;
         }
         .purple-mode {
-            background-color: #f3e5f5;
-            color: #6a1b9a;
+            background-color: #e6e6fa;
+            color: #800080;
         }
         .purple-mode h1, .purple-mode h2 {
-            color: #6a1b9a;
+            color: #800080;
         }
         .purple-mode .popular {
-            color: #6a1b9a;
+            color: #800080;
         }
         .purple-mode button {
-            background-color: #6a1b9a;
+            background-color: #800080;
             color: white;
         }
         .purple-mode button:hover {
-            background-color: #38006b;
+            background-color: #4b004b;
         }
         .orange-mode {
-            background-color: #fff3e0;
-            color: #ef6c00;
+            background-color: #ffe5b4;
+            color: #ff8c00;
         }
         .orange-mode h1, .orange-mode h2 {
-            color: #ef6c00;
+            color: #ff8c00;
         }
         .orange-mode .popular {
-            color: #ef6c00;
+            color: #ff8c00;
         }
         .orange-mode button {
-            background-color: #ef6c00;
+            background-color: #ff8c00;
             color: white;
         }
         .orange-mode button:hover {
-            background-color: #e65100;
+            background-color: #cc7000;
         }
         .pink-mode {
-            background-color: #fce4ec;
-            color: #d81b60;
+            background-color: #ffc0cb;
+            color: #ff69b4;
         }
         .pink-mode h1, .pink-mode h2 {
-            color: #d81b60;
+            color: #ff69b4;
         }
         .pink-mode .popular {
-            color: #d81b60;
+            color: #ff69b4;
         }
         .pink-mode button {
-            background-color: #d81b60;
+            background-color: #ff69b4;
             color: white;
         }
         .pink-mode button:hover {
-            background-color: #880e4f;
+            background-color: #cc548a;
         }
         .yellow-mode {
-            background-color: #fffde7;
-            color: #fbc02d;
+            background-color: #ffffe0;
+            color: #ffd700;
         }
         .yellow-mode h1, .yellow-mode h2 {
-            color: #fbc02d;
+            color: #ffd700;
         }
         .yellow-mode .popular {
-            color: #fbc02d;
+            color: #ffd700;
         }
         .yellow-mode button {
-            background-color: #fbc02d;
+            background-color: #ffd700;
             color: white;
         }
         .yellow-mode button:hover {
-            background-color: #f57f17;
+            background-color: #cca300;
         }
         .brown-mode {
-            background-color: #efebe9;
-            color: #6d4c41;
+            background-color: #d2b48c;
+            color: #8b4513;
         }
         .brown-mode h1, .brown-mode h2 {
-            color: #6d4c41;
+            color: #8b4513;
         }
         .brown-mode .popular {
-            color: #6d4c41;
+            color: #8b4513;
         }
         .brown-mode button {
-            background-color: #6d4c41;
+            background-color: #8b4513;
             color: white;
         }
         .brown-mode button:hover {
-            background-color: #3e2723;
+            background-color: #5c2e0f;
         }
         .grey-mode {
-            background-color: #eceff1;
-            color: #37474f;
+            background-color: #dcdcdc;
+            color: #696969;
         }
         .grey-mode h1, .grey-mode h2 {
-            color: #37474f;
+            color: #696969;
         }
         .grey-mode .popular {
-            color: #37474f;
+            color: #696969;
         }
         .grey-mode button {
-            background-color: #37474f;
+            background-color: #696969;
             color: white;
         }
         .grey-mode button:hover {
-            background-color: #263238;
+            background-color: #474747;
         }
     </style>
     <script>
@@ -265,64 +262,14 @@
             window.location.href = url;
         }
 
-        function changeColorMode() {
-            const mode = document.getElementById('color-mode').value;
-            document.body.className = mode;
-            localStorage.setItem('theme', mode);
-        }
-
-        // Set default theme to dark mode or previously saved theme
         document.addEventListener('DOMContentLoaded', (event) => {
-            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
-            document.body.classList.add(savedTheme);
-            document.getElementById('color-mode').value = savedTheme;
-
-            // Set a random welcome message
             const welcomeMessages = [
-                "Welcome!", "Hello!", "Greetings!", "Hi there!", "Howdy!", 
-                "What's up?", "Good to see you!", "Hey!", "Ahoy!", "Bonjour!",
-                "Hola!", "kid, im always watching", "i dont like tech guys", "Bookmark Our Site ", "Namaste!", "Shalom!",
-                "Salaam!", "Konnichiwa!", "Annyeong!", "Merhaba!", "Sawubona!",
-                "Jambo!", "Aloha!", "Zdravstvuyte!", "Xin chào!", "Yassas!",
-                "Tere!", "Sveiki!", "Labas!", "Ahoj!", "hOlá!", "help",
-                "y am i stuck in this computer..", "Kumusta!", "Sawadee!", "Selamat datang!", "Dobry den!",
-                "Szia!", "Privet!", "Hei!", "Kamusta!", "Salam!", "Marhaba!",
-                "Geia!", "Pryvit!", "Ahlaan!", "Mingalaba!", "Sata srī akāl!"
-            ];
-            const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
-            document.getElementById('welcome-message').innerText = welcomeMessages[randomIndex];
-        });
-    </script>
-</head>
-<body class="dark-mode">
-    <div class="mode-switcher">
-        <select id="color-mode" onchange="changeColorMode()">
-            <option value="dark-mode">Dark Mode</option>
-            <option value="light-mode">Light Mode</option>
-            <option value="blue-mode">Blue Mode</option>
-            <option value="green-mode">Green Mode</option>
-            <option value="red-mode">Red Mode</option>
-            <option value="purple-mode">Purple Mode</option>
-            <option value="orange-mode">Orange Mode</option>
-            <option value="pink-mode">Pink Mode</option>
-            <option value="yellow-mode">Yellow Mode</option>
-            <option value="brown-mode">Brown Mode</option>
-            <option value="grey-mode">Grey Mode</option>
-        </select>
-    </div>
-    <h1>EthanDupe x RCKSTR</h1>
-    <h2 id="welcome-message">Welcome!</h2>
-    <div>
-        <button onclick="Redirc('./proxy/index.html')">Proxy</button>
-        <button onclick="Redirc('./games.html')">Games</button>
-    </div>
-    <div>
-        <p class="popular">Popular 🔥</p>
-        <button onclick="Redirc('./chat/index.html')">Chat</button>
-        <button onclick="Redirc('./3kh0/index.html')">3kh0</button>
-    </div>
-    <div>
-        <button onclick="Redirc('https://discord.gg/zDcVyByaU2')">Join our Discord</button>
-    </div>
-</body>
-</html>
+                "Welcome!", "Hello!", "Hi there!", "Greetings!", "Hey!", "Howdy!",
+                "What's up?", "Good to see you!", "Salutations!", "Hola!", "Bonjour!",
+                "Ciao!", "Hallo!", "Hej!", "Namaste!", "Salam!", "Shalom!", "Salaam!",
+                "Konnichiwa!", "Annyeong!", "Merhaba!", "Sawubona!", "Jambo!", "Aloha!",
+                "Zdravstvuyte!", "Xin chào!", "Yassas!", "Tere!", "Sveiki!", "Labas!",
+                "Ahoj!", "Olá!", "Chào bạn!", "Salut!", "Kumusta!", "Sawadee!",
+                "justins a pro gamer", "uwu princess", "Szia!", "bro,school sux", "Hei!", "Kamusta!",
+                "why follow your dream when u can follow me!?", "lol", "deal with it", "im him", "yo", "wait, hacker?",
+                "Sata srī akāl!", "I love burgers!", "You're awesome!", "schools stupid",
