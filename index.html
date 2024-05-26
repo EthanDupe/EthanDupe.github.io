@@ -16,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EthanDupe x RCKSTR</title>
+ <p id="randomPhrase"></p>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -324,5 +325,26 @@
         
        
     </div>
+  
+
+    <script>
+        // Array of random phrases
+        const phrases = [
+            "The quick brown fox jumps over the lazy dog.",
+            "A stitch in time saves nine.",
+            "To be or not to be, that is the question.",
+            "All that glitters is not gold.",
+            "A journey of a thousand miles begins with a single step."
+        ];
+
+        // Function to get a random phrase
+        function getRandomPhrase() {
+            const randomIndex = Math.floor(Math.random() * phrases.length);
+            return phrases[randomIndex];
+        }
+
+        // Display the random phrase in the HTML
+        document.getElementById("randomPhrase").innerText = getRandomPhrase();
+    </script>
 </body>
 </html>
