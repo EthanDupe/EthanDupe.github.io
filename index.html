@@ -16,7 +16,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EthanDupe x RCKSTR</title>
- <p id="randomPhrase"></p>
+ <br>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -286,20 +287,7 @@
             document.body.classList.add(savedTheme);
             document.getElementById('color-mode').value = savedTheme;
 
-            // Set a random welcome message
-            const welcomeMessages = [
-                "Welcome!", "Hello!", "Greetings!", "Hi there!", "Howdy!", 
-                "What's up?", "Good to see you!", "Hey!", "Ahoy!", "Bonjour!",
-                "Hola!", "Hallo!", "Ciao!", "Salve!", "frick school", "Shalom!",
-                "Salaam!", "Konnichiwa!", "Annyeong!", "Merhaba!", "Sawubona!",
-                "Jambo!", "Aloha!", "Zdravstvuyte!", "Xin chào!", "Yassas!",
-                "Tere!", "Sveiki!", "Labas!", "Ahoj!", "Olá!", "Chào bạn!",
-                "Salut!", "Kumusta!", "Sawadee!", "Selamat datang!", "Dobry den!",
-                "Szia!", "Privet!", "Hei!", "Kamusta!", "Salam!", "Marhaba!",
-                "Geia!", "Pryvit!", "Ahlaan!", "Mingalaba!", "Sata srī akāl!"
-            ];
-            const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
-            document.getElementById('welcome-message').innerText = welcomeMessages[randomIndex];
+           
         });
     </script>
 </head>
@@ -308,6 +296,7 @@
         <button onclick="Redirc('settings.html')">Settings</button>
     </div>
     <h1>EthanDupe x RCKSTR</h1>
+  <p id="randomPhrase"></p>
     <h2 id="welcome-message"></h2>
     <div>
         <button onclick="Redirc('./proxy/index.html')">Proxy</button>
@@ -330,11 +319,13 @@
     <script>
         // Array of random phrases
         const phrases = [
-            "The quick brown fox jumps over the lazy dog.",
-            "A stitch in time saves nine.",
-            "To be or not to be, that is the question.",
-            "All that glitters is not gold.",
-            "A journey of a thousand miles begins with a single step."
+            "Tech guys after me!",
+            "bro, no snitching",
+            "im poor.",
+            "IM HIM",
+            "ayo, no gyatts here"
+            "is it friday yet"
+            "rizzler?"
         ];
 
         // Function to get a random phrase
