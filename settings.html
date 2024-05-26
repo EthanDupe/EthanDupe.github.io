@@ -82,6 +82,14 @@
             <option value="brown-mode">Brown Mode</option>
             <option value="grey-mode">Grey Mode</option>
         </select>
+        <script>
+             // Set default theme to dark mode or previously saved theme
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
+            document.body.classList.add(savedTheme);
+            document.getElementById('color-mode').value = savedTheme;
+        </script>
+       
     </div>
     <div>
         <button onclick="window.location.href='index.html'">Back to Home</button>
