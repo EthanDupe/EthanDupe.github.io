@@ -26,22 +26,26 @@
         }
         h1, h2, p, div > a {
             margin-bottom: 20px;
-            display: block;
+            display: inline-block;
         }
         button {
-            background-color: #008cba;
+            background-color: #007BFF;
             color: white;
             border: none;
             padding: 15px 30px;
             margin: 10px;
             cursor: pointer;
-            border-radius: 50px;
+            border-radius: 8px;
             transition: background-color 0.3s, box-shadow 0.3s;
             font-size: 1em;
         }
         button:hover {
-            background-color: #005f6b;
+            background-color: #0056b3;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
         }
         .popular {
             font-size: 1.2em;
@@ -54,16 +58,16 @@
             right: 20px;
         }
         .settings-button button {
-            padding: 10px;
-            border-radius: 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
             border: none;
             cursor: pointer;
-            background-color: #008cba;
+            background-color: #007BFF;
             color: white;
             transition: background-color 0.3s;
         }
         .settings-button button:hover {
-            background-color: #005f6b;
+            background-color: #0056b3;
         }
         /* Light Mode */
         .light-mode {
@@ -77,11 +81,11 @@
             color: #e74c3c;
         }
         .light-mode button {
-            background-color: #008cba;
+            background-color: #007BFF;
             color: white;
         }
         .light-mode button:hover {
-            background-color: #005f6b;
+            background-color: #0056b3;
         }
         /* Dark Mode */
         .dark-mode {
@@ -119,142 +123,142 @@
         .blue-mode button:hover {
             background-color: #004d40;
         }
-        /* Additional Color Modes */
+        /* Additional Modes */
         .green-mode {
-            background-color: #d0f0c0;
-            color: #006400;
+            background-color: #e8f5e9;
+            color: #2e7d32;
         }
         .green-mode h1, .green-mode h2 {
-            color: #006400;
+            color: #2e7d32;
         }
         .green-mode .popular {
-            color: #006400;
+            color: #2e7d32;
         }
         .green-mode button {
-            background-color: #006400;
+            background-color: #2e7d32;
             color: white;
         }
         .green-mode button:hover {
-            background-color: #004d00;
+            background-color: #1b5e20;
         }
         .red-mode {
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: #ffebee;
+            color: #c62828;
         }
         .red-mode h1, .red-mode h2 {
-            color: #721c24;
+            color: #c62828;
         }
         .red-mode .popular {
-            color: #721c24;
+            color: #c62828;
         }
         .red-mode button {
-            background-color: #721c24;
+            background-color: #c62828;
             color: white;
         }
         .red-mode button:hover {
-            background-color: #501217;
+            background-color: #8e0000;
         }
         .purple-mode {
-            background-color: #e6e6fa;
-            color: #800080;
+            background-color: #f3e5f5;
+            color: #6a1b9a;
         }
         .purple-mode h1, .purple-mode h2 {
-            color: #800080;
+            color: #6a1b9a;
         }
         .purple-mode .popular {
-            color: #800080;
+            color: #6a1b9a;
         }
         .purple-mode button {
-            background-color: #800080;
+            background-color: #6a1b9a;
             color: white;
         }
         .purple-mode button:hover {
-            background-color: #4b004b;
+            background-color: #38006b;
         }
         .orange-mode {
-            background-color: #ffe5b4;
-            color: #ff8c00;
+            background-color: #fff3e0;
+            color: #ef6c00;
         }
         .orange-mode h1, .orange-mode h2 {
-            color: #ff8c00;
+            color: #ef6c00;
         }
         .orange-mode .popular {
-            color: #ff8c00;
+            color: #ef6c00;
         }
         .orange-mode button {
-            background-color: #ff8c00;
+            background-color: #ef6c00;
             color: white;
         }
         .orange-mode button:hover {
-            background-color: #cc7000;
+            background-color: #e65100;
         }
         .pink-mode {
-            background-color: #ffc0cb;
-            color: #ff69b4;
+            background-color: #fce4ec;
+            color: #d81b60;
         }
         .pink-mode h1, .pink-mode h2 {
-            color: #ff69b4;
+            color: #d81b60;
         }
         .pink-mode .popular {
-            color: #ff69b4;
+            color: #d81b60;
         }
         .pink-mode button {
-            background-color: #ff69b4;
+            background-color: #d81b60;
             color: white;
         }
         .pink-mode button:hover {
-            background-color: #cc548a;
+            background-color: #880e4f;
         }
         .yellow-mode {
-            background-color: #ffffe0;
-            color: #ffd700;
+            background-color: #fffde7;
+            color: #fbc02d;
         }
         .yellow-mode h1, .yellow-mode h2 {
-            color: #ffd700;
+            color: #fbc02d;
         }
         .yellow-mode .popular {
-            color: #ffd700;
+            color: #fbc02d;
         }
         .yellow-mode button {
-            background-color: #ffd700;
+            background-color: #fbc02d;
             color: white;
         }
         .yellow-mode button:hover {
-            background-color: #cca300;
+            background-color: #f57f17;
         }
         .brown-mode {
-            background-color: #d2b48c;
-            color: #8b4513;
+            background-color: #efebe9;
+            color: #6d4c41;
         }
         .brown-mode h1, .brown-mode h2 {
-            color: #8b4513;
+            color: #6d4c41;
         }
         .brown-mode .popular {
-            color: #8b4513;
+            color: #6d4c41;
         }
         .brown-mode button {
-            background-color: #8b4513;
+            background-color: #6d4c41;
             color: white;
         }
         .brown-mode button:hover {
-            background-color: #5c2e0f;
+            background-color: #3e2723;
         }
         .grey-mode {
-            background-color: #dcdcdc;
-            color: #696969;
+            background-color: #eceff1;
+            color: #37474f;
         }
         .grey-mode h1, .grey-mode h2 {
-            color: #696969;
+            color: #37474f;
         }
         .grey-mode .popular {
-            color: #696969;
+            color: #37474f;
         }
         .grey-mode button {
-            background-color: #696969;
+            background-color: #37474f;
             color: white;
         }
         .grey-mode button:hover {
-            background-color: #474747;
+            background-color: #263238;
         }
     </style>
     <script>
@@ -262,14 +266,52 @@
             window.location.href = url;
         }
 
+        function changeColorMode() {
+            const mode = document.getElementById('color-mode').value;
+            document.body.className = mode;
+            localStorage.setItem('theme', mode);
+        }
+
+        // Set default theme to dark mode or previously saved theme
         document.addEventListener('DOMContentLoaded', (event) => {
+            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
+            document.body.classList.add(savedTheme);
+            document.getElementById('color-mode').value = savedTheme;
+
+            // Set a random welcome message
             const welcomeMessages = [
-                "Welcome!", "Hello!", "Hi there!", "Greetings!", "Hey!", "Howdy!",
-                "What's up?", "Good to see you!", "Salutations!", "Hola!", "Bonjour!",
-                "Ciao!", "Hallo!", "Hej!", "Namaste!", "Salam!", "Shalom!", "Salaam!",
-                "Konnichiwa!", "Annyeong!", "Merhaba!", "Sawubona!", "Jambo!", "Aloha!",
-                "Zdravstvuyte!", "Xin chào!", "Yassas!", "Tere!", "Sveiki!", "Labas!",
-                "Ahoj!", "Olá!", "Chào bạn!", "Salut!", "Kumusta!", "Sawadee!",
-                "justins a pro gamer", "uwu princess", "Szia!", "bro,school sux", "Hei!", "Kamusta!",
-                "why follow your dream when u can follow me!?", "lol", "deal with it", "im him", "yo", "wait, hacker?",
-                "Sata srī akāl!", "I love burgers!", "You're awesome!", "schools stupid",
+                "Welcome!", "Hello!", "Greetings!", "Hi there!", "Howdy!", 
+                "What's up?", "Good to see you!", "Hey!", "Ahoy!", "Bonjour!",
+                "Hola!", "Hallo!", "Ciao!", "Salve!", "Namaste!", "Shalom!",
+                "Salaam!", "Konnichiwa!", "Annyeong!", "Merhaba!", "Sawubona!",
+                "Jambo!", "Aloha!", "Zdravstvuyte!", "Xin chào!", "Yassas!",
+                "Tere!", "Sveiki!", "Labas!", "Ahoj!", "Olá!", "Chào bạn!",
+                "Salut!", "Kumusta!", "Sawadee!", "Selamat datang!", "Dobry den!",
+                "Szia!", "Privet!", "Hei!", "Kamusta!", "Salam!", "Marhaba!",
+                "Geia!", "Pryvit!", "Ahlaan!", "Mingalaba!", "Sata srī akāl!"
+            ];
+            const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
+            document.getElementById('welcome-message').innerText = welcomeMessages[randomIndex];
+        });
+    </script>
+</head>
+<body class="dark-mode">
+    <div class="settings-button">
+        <button onclick="Redirc('settings.html')">Settings</button>
+    </div>
+    <h1>EthanDupe x RCKSTR</h1>
+    <h2 id="welcome-message">Welcome!</h2>
+    <div>
+        <button onclick="Redirc('./proxy/index.html')">Proxy</button>
+        <button onclick="Redirc('./games.html')">Games</button>
+    </div>
+    <div>
+        <p class="popular">Popular 🔥</p>
+        <button onclick="Redirc('./chat/index.html')">Chat</button>
+        <button onclick="Redirc('./3kh0/index.html')">3kh0</button>
+    </div>
+    <div>
+        <button onclick="Redirc('https://discord.gg/zDcVyByaU2')">Join our Discord</button>
+    </div>
+</body>
+</html>
