@@ -12,18 +12,33 @@
             color: #fff;
             background-color: transparent;
             box-shadow: none;
+            margin: 10px;
+            transition: transform 0.2s;
+            border-radius: 15px;
+            overflow: hidden;
         }
         
+        .button:hover {
+            transform: scale(1.05);
+        }
+
         body {
             background-color: #151515;
             color: #fff;
             font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .search-bar {
             width: 100%;
+            max-width: 600px;
             padding: 10px;
             box-sizing: border-box;
+            border: none;
+            border-radius: 5px;
         }
 
         .top-bar {
@@ -32,6 +47,8 @@
             align-items: center;
             padding: 10px;
             background-color: #333;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .theme-switcher {
@@ -40,6 +57,31 @@
 
         .theme-switcher select {
             padding: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .button img {
+            border-radius: 15px;
+            width: 275px;
+            height: 280px;
+        }
+
+        .button br {
+            display: none;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .button span {
+            display: block;
+            padding: 10px 0;
+            text-align: center;
         }
     </style>
 </head>
@@ -55,60 +97,45 @@
             </select>
         </div>
     </div>
-    
-    <button onclick="redirc('./games/Minecraft_1.8.html')" class="button"> 
-        <img src="./assets/img/minecraft_grass_block.jpg" alt="buttonpng" border='0' width="275" height="280" />
-        <br>
-        Minecraft 1.8.8
-    </button>
-    <button onclick="redirc('./games/slope.htm')" class="button">
-        <img src="./assets/img/slope.jpg" alt="buttonpng" border='0' width="275" height="280" />
-        <br>
-        Slope
-    </button>
-    <button onclick="redirc('./games/tetris.html')" class="button">
-        <img src="./assets/img/tetris.jpg" alt="buttonpng" border='0' width="275" height="280" />
-        <br>
-        Tetris
-    </button>
-    <button onclick="redirc('./games/Territorial_io_MP.html')" class="button"> 
-        <img src="./assets/img/Territorial.jpg" alt="buttonpng" border='0' width="275" height="280" />
-        <br>
-        Territorial.io (multiplayer compatible)
-        <br>
-        ‎ ‎ 
-    </button>
-    <button onclick="redirc('./games/2048.html')" class="button">
-        <img src="./assets/img/2048.png" alt="buttonpng" border='0' width="275" height="280"/>
-        <br>
-        2048
-        <br>
-    </button>
-    <button onclick="redirc('./games/Minecraft_1.12.2.html')" class="button">
-        <img src="./assets/img/minecraft_grass_block.jpg" border="0" width="275" height="280">
-        <br>
-        Minecraft 1.12.2
-        <br>
-    </button>
-    <button onclick="redirc('./games/TerrariaMP.html')" class="button">
-        <img src="./assets/img/Terraria.bmp" border="0" width="275" height="280">
-        <br>
-        Terraria (Multiplayer)
-        <br>
-    </button>
-    <button onclick="redirc('./games/Terraria.html')" class="button">
-        <img src="./assets/img/Terraria.bmp" border="0" width="275" height="280">
-        <br>
-        Terraria (Singleplayer)
-        <br>
-    </button>
-    <button onclick="redirc('./games/Cookie_clicker/index.html')" class="button">
-        <img src="./assets/img/cookieclicker.jpg" border="0" width="275" height="280">
-        <br>
-        Cookie clicker
-        <br>
-        ‎ ‎ ‎  <!--There are invisible characters here. They are needed. Do not delete them or it WILL mess up the CSS-->
-    </button>
+
+    <div class="buttons-container">
+        <button onclick="redirc('./games/Minecraft_1.8.html')" class="button"> 
+            <img src="./assets/img/minecraft_grass_block.jpg" alt="Minecraft 1.8.8">
+            <span>Minecraft 1.8.8</span>
+        </button>
+        <button onclick="redirc('./games/slope.htm')" class="button">
+            <img src="./assets/img/slope.jpg" alt="Slope">
+            <span>Slope</span>
+        </button>
+        <button onclick="redirc('./games/tetris.html')" class="button">
+            <img src="./assets/img/tetris.jpg" alt="Tetris">
+            <span>Tetris</span>
+        </button>
+        <button onclick="redirc('./games/Territorial_io_MP.html')" class="button"> 
+            <img src="./assets/img/Territorial.jpg" alt="Territorial.io (multiplayer compatible)">
+            <span>Territorial.io (multiplayer compatible)</span>
+        </button>
+        <button onclick="redirc('./games/2048.html')" class="button">
+            <img src="./assets/img/2048.png" alt="2048">
+            <span>2048</span>
+        </button>
+        <button onclick="redirc('./games/Minecraft_1.12.2.html')" class="button">
+            <img src="./assets/img/minecraft_grass_block.jpg" alt="Minecraft 1.12.2">
+            <span>Minecraft 1.12.2</span>
+        </button>
+        <button onclick="redirc('./games/TerrariaMP.html')" class="button">
+            <img src="./assets/img/Terraria.bmp" alt="Terraria (Multiplayer)">
+            <span>Terraria (Multiplayer)</span>
+        </button>
+        <button onclick="redirc('./games/Terraria.html')" class="button">
+            <img src="./assets/img/Terraria.bmp" alt="Terraria (Singleplayer)">
+            <span>Terraria (Singleplayer)</span>
+        </button>
+        <button onclick="redirc('./games/Cookie_clicker/index.html')" class="button">
+            <img src="./assets/img/cookieclicker.jpg" alt="Cookie clicker">
+            <span>Cookie clicker</span>
+        </button>
+    </div>
 
     <script>
         function redirc(path) {
