@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YG05RYNDWG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YG05RYNDWG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-YG05RYNDWG');
-</script>
+      gtag('config', 'G-YG05RYNDWG');
+    </script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6081838269252191"
-     crossorigin="anonymous"></script>
-</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6081838269252191" crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EthanDupe x RCKSTR</title>
@@ -22,9 +21,10 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            margin: 0;
             transition: background-color 0.3s, color 0.3s;
         }
-        h1 {
+        h1, h2 {
             margin-bottom: 20px;
         }
         button {
@@ -34,34 +34,60 @@
             padding: 10px 20px;
             margin: 10px;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 1em;
         }
         button:hover {
             background-color: #005f6b;
+            transform: scale(1.05);
         }
         .popular {
             font-size: 1.2em;
             font-weight: bold;
             color: #e74c3c;
         }
+        .mode-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .mode-switcher select {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #008cba;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .mode-switcher select:hover {
+            background-color: #005f6b;
+        }
         /* Light Mode */
         .light-mode {
             background-color: #f4f4f4;
             color: #333;
         }
-        .light-mode h1 {
+        .light-mode h1, .light-mode h2 {
             color: #333;
         }
         .light-mode .popular {
             color: #e74c3c;
+        }
+        .light-mode button {
+            background-color: #008cba;
+            color: white;
+        }
+        .light-mode button:hover {
+            background-color: #005f6b;
         }
         /* Dark Mode */
         .dark-mode {
             background-color: #333;
             color: #f4f4f4;
         }
-        .dark-mode h1 {
+        .dark-mode h1, .dark-mode h2 {
             color: #f4f4f4;
         }
         .dark-mode .popular {
@@ -79,7 +105,7 @@
             background-color: #e0f7fa;
             color: #00796b;
         }
-        .blue-mode h1 {
+        .blue-mode h1, .blue-mode h2 {
             color: #00796b;
         }
         .blue-mode .popular {
@@ -92,20 +118,6 @@
         .blue-mode button:hover {
             background-color: #004d40;
         }
-        #color-mode {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
-            background-color: #008cba;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        #color-mode:hover {
-            background-color: #005f6b;
-        }
     </style>
     <script>
         function Redirc(url) {
@@ -116,14 +128,21 @@
             const mode = document.getElementById('color-mode').value;
             document.body.className = mode;
         }
+
+        // Set default theme to dark mode
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.body.classList.add('dark-mode');
+        });
     </script>
 </head>
-<body class="light-mode">
-    <select id="color-mode" onchange="changeColorMode()">
-        <option value="light-mode">Light Mode</option>
-        <option value="dark-mode">Dark Mode</option>
-        <option value="blue-mode">Blue Mode</option>
-    </select>
+<body>
+    <div class="mode-switcher">
+        <select id="color-mode" onchange="changeColorMode()">
+            <option value="light-mode">Light Mode</option>
+            <option value="dark-mode" selected>Dark Mode</option>
+            <option value="blue-mode">Blue Mode</option>
+        </select>
+    </div>
     <h1>EthanDupe x RCKSTR</h1>
     <h2>Welcome!</h2>
     <div>
