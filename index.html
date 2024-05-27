@@ -270,15 +270,17 @@
             background-color: #263238;
         }
      
-        function changeFontFamily() {
-            const font = document.getElementById('font-family').value;
-            document.body.style.fontFamily = font;
-            localStorage.setItem('font', font);
-        }
+       
     </style>
     <script>
         function Redirc(url) {
             window.location.href = url;
+        }
+     
+      function changeFontFamily() {
+            const font = document.getElementById('font-family').value;
+            document.body.style.fontFamily = font;
+            localStorage.setItem('font', font);
         }
 
         function changeColorMode() {
