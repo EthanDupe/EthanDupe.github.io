@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <style>
-   body {
+        body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
             margin: 0;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, font-family 0.3s;
         }
         h1 {
             margin-bottom: 20px;
@@ -29,7 +29,7 @@
             padding: 15px 30px;
             margin: 10px;
             cursor: pointer;
-            border-radius: 12px; /* Adjusted for squarish round look */
+            border-radius: 12px;
             transition: background-color 0.3s, box-shadow 0.3s;
             font-size: 1em;
             display: inline-block;
@@ -54,7 +54,7 @@
         }
         .settings-button button {
             padding: 10px;
-            border-radius: 12px; /* Adjusted for squarish round look */
+            border-radius: 12px;
             border: none;
             cursor: pointer;
             background-color: #008cba;
@@ -255,13 +255,6 @@
         .grey-mode button:hover {
             background-color: #263238;
         }
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
         h1, h2, p, div > a {
             margin-bottom: 20px;
             display: inline-block;
@@ -270,24 +263,10 @@
         h1:hover, h2:hover, p:hover, div > a:hover {
             transform: scale(1.05) rotate(1deg);
         }
-        button {
-            background-color: #008cba;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: background-color 0.3s, transform 0.2s;
-            font-size: 1em;
-        }
-        button:hover {
-            background-color: #005f6b;
-        }
-        .mode-switcher {
+        .mode-switcher, .font-switcher {
             margin: 20px 0;
         }
-        .mode-switcher select {
+        .mode-switcher select, .font-switcher select {
             padding: 10px;
             border-radius: 10px;
             border: none;
@@ -296,7 +275,7 @@
             color: white;
             transition: background-color 0.3s;
         }
-        .mode-switcher select:hover {
+        .mode-switcher select:hover, .font-switcher select:hover {
             background-color: #005f6b;
         }
     </style>
@@ -307,11 +286,21 @@
             localStorage.setItem('theme', mode);
         }
 
-        // Set default theme to previously saved theme
+        function changeFontFamily() {
+            const font = document.getElementById('font-family').value;
+            document.body.style.fontFamily = font;
+            localStorage.setItem('font', font);
+        }
+
+        // Set default theme and font to previously saved settings
         document.addEventListener('DOMContentLoaded', (event) => {
             const savedTheme = localStorage.getItem('theme') || 'dark-mode';
             document.body.classList.add(savedTheme);
             document.getElementById('color-mode').value = savedTheme;
+
+            const savedFont = localStorage.getItem('font') || 'Arial, sans-serif';
+            document.body.style.fontFamily = savedFont;
+            document.getElementById('font-family').value = savedFont;
         });
     </script>
 </head>
@@ -332,18 +321,22 @@
             <option value="brown-mode">Brown Mode</option>
             <option value="grey-mode">Grey Mode</option>
         </select>
-        <script>
-             // Set default theme to dark mode or previously saved theme
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
-            document.body.classList.add(savedTheme);
-            document.getElementById('color-mode').value = savedTheme;
-        </script>
-       
+    </div>
+    <div class="font-switcher">
+        <label for="font-family">Choose Font:</label>
+        <select id="font-family" onchange="changeFontFamily()">
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Courier New, monospace">Courier New</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Tahoma, sans-serif">Tahoma</option>
+            <option value="Times New Roman, serif">Times New Roman</option>
+            <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+        </select>
     </div>
     <div>
         <button onclick="window.location.href='index.html'">Back to Home</button>
-
     </div>
 </body>
 </html>
+
