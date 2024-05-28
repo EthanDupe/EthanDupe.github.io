@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
@@ -16,16 +16,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EthanDupe x RCKSTR</title>
- <br>
- <link rel="stylesheet" href="./css/index.css">
-
+    <link rel="stylesheet" href="./css/index.css">
 
     <script>
         function Redirc(url) {
             window.location.href = url;
         }
      
-      function changeFontFamily() {
+        function changeFontFamily() {
             const font = document.getElementById('font-family').value;
             document.body.style.fontFamily = font;
             localStorage.setItem('font', font);
@@ -43,7 +41,25 @@
             document.body.classList.add(savedTheme);
             document.getElementById('color-mode').value = savedTheme;
 
-           
+            // Array of random phrases
+            const phrases = [
+                "Tech guys after me!",
+                "bro, no snitching",
+                "im poor.",
+                "IM HIM",
+                "ayo, no gyatts here",
+                "is it friday yet",
+                "rizzler?"
+            ];
+
+            // Function to get a random phrase
+            function getRandomPhrase() {
+                const randomIndex = Math.floor(Math.random() * phrases.length);
+                return phrases[randomIndex];
+            }
+
+            // Display the random phrase in the HTML
+            document.getElementById("randomPhrase").innerText = getRandomPhrase();
         });
     </script>
 </head>
@@ -66,31 +82,6 @@
         <button onclick="Redirc('https://discord.gg/zDcVyByaU2')">Join our Discord</button>
     </div>
     <div>
-        
-       
     </div>
-  
-
-    <script>
-        // Array of random phrases
-        const phrases = [
-            "Tech guys after me!",
-            "bro, no snitching",
-            "im poor.",
-            "IM HIM",
-            "ayo, no gyatts here"
-            "is it friday yet"
-            "rizzler?"
-        ];
-
-        // Function to get a random phrase
-        function getRandomPhrase() {
-            const randomIndex = Math.floor(Math.random() * phrases.length);
-            return phrases[randomIndex];
-        }
-
-        // Display the random phrase in the HTML
-        document.getElementById("randomPhrase").innerText = getRandomPhrase();
-    </script>
 </body>
 </html>
