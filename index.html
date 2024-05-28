@@ -59,9 +59,21 @@
             }
 
             // Display the random phrase in the HTML
-            document.getElementById("randomPhrase").innerText = getRandomPhrase();
+            const randomPhraseElement = document.getElementById("randomPhrase");
+            if (randomPhraseElement) {
+                randomPhraseElement.innerText = getRandomPhrase();
+            } else {
+                console.error("Element with ID 'randomPhrase' not found.");
+            }
         });
     </script>
+    <style>
+        #randomPhrase {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body class="dark-mode">
     <div class="settings-button">
