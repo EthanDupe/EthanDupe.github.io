@@ -18,14 +18,24 @@
             width: 100vw;
             height: 100vh;
         }
+        #centerText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ff00;
+            font-size: 10vw;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
+    <div id="centerText">404</div>
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -33,6 +43,8 @@
         const columns = canvas.width / fontSize;
 
         const drops = Array(Math.floor(columns)).fill(0);
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+=-{}[]|:;"<>,.?/~`';
 
         function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -42,8 +54,8 @@
             ctx.font = `${fontSize}px 'Courier New'`;
 
             for (let i = 0; i < drops.length; i++) {
-                const text = '404';
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                const char = characters[Math.floor(Math.random() * characters.length)];
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
 
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                     drops[i] = 0;
