@@ -9,7 +9,7 @@
             background-color: #121212;
             color: #f0f0f0;
             font-family: Arial, sans-serif;
-            display: flex;
+            display: none; /* Initially hide the content */
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -54,6 +54,19 @@
         <span>-</span>
         <a href="/ruffle/index.html">Ruffle Emu (BETA)</a>
     </div>
+
+    <script>
+        // Prompt the user for a password
+        const password = prompt("Please enter the password to access this site:");
+
+        // Check if the password is correct
+        if (password === "abc") {
+            document.body.style.display = "flex"; // Show the content if the password is correct
+        } else {
+            alert("Incorrect password. Access denied.");
+            window.location.href = "https://www.google.com"; // Redirect if the password is incorrect
+        }
+    </script>
 
 </body>
 </html>
