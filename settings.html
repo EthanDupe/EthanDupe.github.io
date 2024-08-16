@@ -9,105 +9,72 @@
             background-color: #121212;
             color: #f0f0f0;
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 20px;
         }
-        .button {
+        h1 {
+            color: #00ff00;
+        }
+        .theme-button, .cookie-button {
+            margin-top: 1em;
+            padding: 10px;
             background-color: #00ff00;
             color: #121212;
-            padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 1em;
             cursor: pointer;
-            margin-top: 20px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .button:hover {
-            background-color: #00cc00;
         }
         .notification {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #00ff00;
-            color: #121212;
-            text-align: center;
-            border-radius: 5px;
+            display: none;
             padding: 10px;
-            position: fixed;
-            z-index: 1;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1em;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-top: 1em;
         }
         .notification.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        @keyframes fadein {
-            from {bottom: 0; opacity: 0;} 
-            to {bottom: 30px; opacity: 1;}
-        }
-        @keyframes fadeout {
-            from {bottom: 30px; opacity: 1;} 
-            to {bottom: 0; opacity: 0;}
+            display: block;
         }
     </style>
 </head>
 <body>
-
     <h1>Settings</h1>
-    <p>Manage your website settings below.</p>
-
-    <button class="button" onclick="deleteCookies()">Delete ALL DATA</button>
-    <button class="button" onclick="checkURL()">Check For Update</button>
-
-    <div id="cookieNotification" class="notification">
-        All cookies have been deleted.
-    </div>
-
+    <button class="theme-button" onclick="setTheme('dark')">Dark Theme</button>
+    <button class="theme-button" onclick="setTheme('light')">Light Theme</button>
+    <button class="cookie-button" onclick="deleteCookies()">Delete Cookies</button>
+    <div class="notification" id="notification">Cookies have been deleted!</div>
     <script>
-        function deleteCookies() {
-            const cookies = document.cookie.split("; ");
-            for (let cookie of cookies) {
-                const eqPos = cookie.indexOf("=");
-                const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-            }
-            showNotification();
+        function setTheme(theme) {
+            document.body.className = theme + '-theme';
+            document.cookie = "theme=" + theme + "; path=/";
         }
 
-        function showNotification() {
-            const notification = document.getElementById("cookieNotification");
-            notification.className = "notification show";
+        function deleteCookies() {
+            document.cookie.split(';').forEach(function(c) {
+                document.cookie = c.replace(/^.+/, '') + ';expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+            });
+            showNotification('Cookies have been deleted!');
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.classList.add('show');
             setTimeout(() => {
-                notification.className = notification.className.replace("show", "");
+                notification.classList.remove('show');
             }, 3000);
         }
 
-        async function checkURL() {
-            const url = "https://ethandupe.github.io/wordupdater.html"; // Set your URL here
-            const targetWord = "yes"; // Replace "yes" with the word you want to check
-
-            try {
-                const response = await fetch(url);
-                const text = await response.text();
-
-                if (text.includes(targetWord)) {
-                    window.location.href = "https://ethandupe.github.io/update.html"; // Replace with your redirect URL
-                } else {
-                    alert("Word not found!");
-                }
-            } catch (error) {
-                alert("There was an error finding the keyword!");
-                console.error("Error:", error);
+        window.onload = function() {
+            // Initialize theme based on cookies
+            const cookies = document.cookie.split(';');
+            const themeCookie = cookies.find(cookie => cookie.trim().startsWith('theme='));
+            if (themeCookie) {
+                const theme = themeCookie.split('=')[1];
+                document.body.className = theme + '-theme';
             }
         }
     </script>
-
 </body>
 </html>
