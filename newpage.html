@@ -9,24 +9,33 @@
             background-color: #121212;
             color: #f0f0f0;
             font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
+            position: relative;
         }
         h1 {
             font-size: 3em;
             margin-bottom: 0.5em;
             color: #00ff00;
+            position: relative;
+            z-index: 1;
         }
         p {
             font-size: 1.2em;
             margin: 0.5em 0;
+            position: relative;
+            z-index: 1;
         }
         .links {
             margin-top: 2em;
+            position: relative;
+            z-index: 1;
         }
         .links a {
             font-size: 1.2em;
@@ -43,15 +52,50 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: #000000;
+            color: #00ff00;
             padding: 10px;
-            border: 1px solid #f5c6cb;
+            border: 1px solid #00ff00;
             border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.8);
+            z-index: 1000;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+        }
+        #notification button {
+            background: none;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 10px;
+            transition: background 0.3s, color 0.3s;
+        }
+        #notification button:hover {
+            background: #00ff00;
+            color: #121212;
+        }
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
+    <canvas class="matrix-canvas"></canvas>
     <h1>Welcome To A70M Web</h1>
     <p>This Website is undergoing multiple stages for testing. Please be patient.</p>
     <p>Other things:</p>
@@ -66,23 +110,59 @@
         <span>-</span>
         <a href="https://ethandupe.github.io/settings">Settings (Beta)</a>
     </div>
-    <!--<div id="notification">
-        Update recommended! <button onclick="redirectToUpdate()">Update Now!</button>
-        <button onclick="dismissNotification()">Dismiss</button>
+    <div id="notification">
+        Welcome to A70M Web! <button onclick="dismissNotification()">Dismiss</button>
     </div>
-    <script> 
-        function redirectToUpdate() {
-            window.location.href = "update.html";
-        }
-
+    
+    <script>
         function dismissNotification() {
             document.getElementById("notification").style.display = "none";
         }
 
         window.onload = function() {
-            document.body.style.display = "flex"; // Show the content
-            // Add any logic for displaying the notification if needed
-        }  -->
+            // Display notification
+            let notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            
+            // Automatically dismiss notification after 2 minutes
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 120000);
+
+            // Matrix effect
+            const canvas = document.querySelector('.matrix-canvas');
+            const ctx = canvas.getContext('2d');
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'.split('');
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            const drops = Array(Math.floor(columns)).fill(1);
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                drops.length = Math.floor(canvas.width / fontSize);
+                drops.fill(1);
+            }
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            setInterval(drawMatrix, 33);
+        }
     </script>
 </body>
 </html>
