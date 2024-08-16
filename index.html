@@ -150,8 +150,8 @@
                     return;
                 }
 
-                var minutes = Math.floor(timeLeft / 60000);
-                var seconds = Math.floor((timeLeft % 60000) / 1000);
+                var minutes = Math.floor(timeLeft / 3.24e+7);
+                var seconds = Math.floor((timeLeft % 3.24e+7) / 1000);
                 seconds = seconds < 10 ? '0' + seconds : seconds;
                 countdownElement.textContent = `${minutes}:${seconds}`;
 
