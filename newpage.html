@@ -38,21 +38,16 @@
         .links a:hover {
             color: #ffffff;
         }
-        #notification-container {
+        #notification {
+            display: none;
             position: fixed;
             top: 10px;
-            left: 10px;
-            max-width: 300px;
-        }
-        .notification {
-            display: none;
+            right: 10px;
             background-color: #f8d7da;
             color: #721c24;
             padding: 10px;
             border: 1px solid #f5c6cb;
             border-radius: 5px;
-            margin-bottom: 5px;
-            word-wrap: break-word;
         }
     </style>
 </head>
@@ -67,49 +62,24 @@
         <span>-</span>
         <a href="/chat/index.html">CHAT (BETA)</a>
         <span>-</span>
-        <a href="settings.html">Settings (Beta)</a>
+        <a href="https://ethandupe.github.io/settings">Settings (Beta)</a>
     </div>
-    <button onclick="fetchDocument()">Fetch Document</button>
-    <div id="notification-container"></div>
+    <!--<div id="notification">
+        Update recommended! <button onclick="redirectToUpdate()">Update Now!</button>
+        <button onclick="dismissNotification()">Dismiss</button>
+    </div>
+    <script> -->
+        function redirectToUpdate() {
+            window.location.href = "update.html";
+        }
 
-    <script>
-        async function fetchDocument() {
-            const url = 'your-document-url.txt'; // Replace with your document URL
-            const response = await fetch(url);
-            const text = await response.text();
-            
-            // Display word count
-            const wordCount = text.split(/\s+/).length;
-            alert(`Word Count: ${wordCount}`);
-            
-            // Split content into sentences
-            const sentences = text.match(/[^.!?]*[.!?]/g) || [];
-            const notificationContainer = document.getElementById('notification-container');
-            notificationContainer.innerHTML = ''; // Clear previous notifications
-
-            // Display notifications for each sentence
-            sentences.forEach((sentence, index) => {
-                setTimeout(() => {
-                    const notification = document.createElement('div');
-                    notification.className = 'notification';
-                    notification.innerText = sentence.trim();
-                    notificationContainer.appendChild(notification);
-                    notification.style.display = 'block';
-                    setTimeout(() => {
-                        notification.style.display = 'none';
-                    }, 5000); // Hide notification after 5 seconds
-                }, index * 6000); // Show notifications one after another
-            });
+        function dismissNotification() {
+            document.getElementById("notification").style.display = "none";
         }
 
         window.onload = function() {
-            // Load theme from cookie
-            const cookies = document.cookie.split(';');
-            const themeCookie = cookies.find(cookie => cookie.trim().startsWith('theme='));
-            if (themeCookie) {
-                const theme = themeCookie.split('=')[1];
-                document.body.className = theme + '-theme';
-            }
+            document.body.style.display = "flex"; // Show the content
+            // Add any logic for displaying the notification if needed
         }
     </script>
 </body>
