@@ -5,50 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Page</title>
     <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #000000; /* Dark background for a hacker feel */
+            color: #00FF00; /* Green text color */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #progressContainer {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
         #progressBar {
             width: 100%;
-            background-color: #f3f3f3;
+            background-color: #00FF00; /* Green background for progress bar container */
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Glowing effect */
         }
 
         #progress {
-            width: 0%;
             height: 30px;
-            background-color: #4caf50;
+            background-color: #000000; /* Dark background for progress bar */
+            color: #00FF00; /* Green text color for progress */
+            border-radius: 5px;
+            width: 0%;
             text-align: center;
             line-height: 30px;
-            color: white;
+            transition: width 0.4s ease;
+        }
+
+        .notification {
+            background: rgba(0, 0, 0, 0.7);
+            color: #00FF00; /* Green text color */
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Glowing effect */
         }
     </style>
 </head>
 <body>
-    <div id="progressBar">
-        <div id="progress">0%</div>
+    <div id="progressContainer">
+        <h1>Checking for Updates...</h1>
+        <div id="progressBar">
+            <div id="progress">0%</div>
+        </div>
+        <div id="notification" class="notification" style="display:none;"></div>
     </div>
 
     <script>
+        function checkForUpdate() {
+            const url = 'https://ethandupe.github.io/wordupdater'; // Replace with your update check URL
+
+            fetch(url)
+                .then(response => response.text())
+                .then(text => {
+                    if (text.includes('yes')) {
+                        updateProgress();
+                    } else {
+                        window.location.href = 'noupdate.html'; // Redirect if "yes" is not found
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking for update:', error);
+                    window.location.href = 'error.html'; // Redirect on error
+                });
+        }
+
+        function updateProgress() {
+            let progress = document.getElementById("progress");
+            let notification = document.getElementById("notification");
+            let width = 0;
+            let duration = Math.floor(Math.random() * 5000) + 3000; // Random duration between 3 and 8 seconds
+            let stopAt = Math.floor(Math.random() * 101); // Random stop percentage
+
+            function startProgress() {
+                let interval = setInterval(function() {
+                    if (width >= stopAt) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            // Random interval between 1 and 2 seconds before restarting
+                            setTimeout(startProgress, Math.floor(Math.random() * 1000) + 1000);
+                        }, 1000); // Delay before restarting
+                    } else {
+                        width++;
+                        progress.style.width = width + '%';
+                        progress.innerHTML = width + '%';
+                    }
+                }, duration / 100); // Adjust interval based on random duration
+            }
+
+            notification.innerHTML = `Updating... Please wait.`;
+            notification.style.display = 'inline-block';
+
+            startProgress(); // Start the progress animation
+        }
+
         function setCookie(name, value, days) {
             let date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
         }
 
-        function updateProgress() {
-            let progress = document.getElementById("progress");
-            let width = 0;
-            let interval = setInterval(function() {
-                if (width >= 100) {
-                    clearInterval(interval);
-                    setCookie("updateCompleted", "true", 1);
-                    window.location.href = "newpage.html";
-                } else {
-                    width++;
-                    progress.style.width = width + '%';
-                    progress.innerHTML = width + '%';
-                }
-            }, 50); // Adjust the interval to control the speed of the progress bar
-        }
-
-        window.onload = updateProgress;
+        window.onload = checkForUpdate;
     </script>
 </body>
 </html>
