@@ -135,7 +135,7 @@
 
     window.onload = function() {
         if (getCookie("updateCompleted")) {
-            window.location.href = "newpage.html";
+           // window.location.href = "newpage.html";
         } else if (!getCookie("updateClicked") && !getCookie("updateDismissed")) {
             document.getElementById("notification").style.display = "block";
         }
