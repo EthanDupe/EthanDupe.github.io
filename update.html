@@ -76,7 +76,7 @@
                 })
                 .catch(error => {
                     console.error('Error checking for update:', error);
-                    window.location.href = 'error.html'; // Redirect on error
+                    window.location.href = '404.html'; // Redirect on error
                 });
         }
 
@@ -84,23 +84,18 @@
             let progress = document.getElementById("progress");
             let notification = document.getElementById("notification");
             let width = 0;
-            let duration = Math.floor(Math.random() * 5000) + 3000; // Random duration between 3 and 8 seconds
-            let stopAt = Math.floor(Math.random() * 101); // Random stop percentage
+            let duration = 10000; // Fixed duration of 10 seconds
+            let step = 1; // Progress increment per step
 
             function startProgress() {
                 let interval = setInterval(function() {
-                    if (width >= stopAt) {
-                        clearInterval(interval);
-                        setTimeout(() => {
-                            // Random interval between 1 and 2 seconds before restarting
-                            setTimeout(startProgress, Math.floor(Math.random() * 1000) + 1000);
-                        }, 1000); // Delay before restarting
-                    } else {
-                        width++;
-                        progress.style.width = width + '%';
-                        progress.innerHTML = width + '%';
+                    if (width >= 100) {
+                        width = 0; // Reset width to 0 for continuous progress
                     }
-                }, duration / 100); // Adjust interval based on random duration
+                    width += step;
+                    progress.style.width = width + '%';
+                    progress.innerHTML = width + '%';
+                }, duration / (100 / step)); // Adjust interval based on duration and step
             }
 
             notification.innerHTML = `Updating... Please wait.`;
