@@ -56,6 +56,59 @@
         <span>-</span>
         <a href="/chat/index.html">CHAT (BETA)</a>
     </div>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #notification {
+            display: none;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification">
+        Update recommended! <button onclick="redirectToUpdate()">Update Now</button>
+    </div>
+
+    <script>
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(";");
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split("=");
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        function setCookie(name, value, days) {
+            let date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+        }
+
+        function redirectToUpdate() {
+            setCookie("updateClicked", "true", 1);
+            window.location.href = "update.html";
+        }
+
+        window.onload = function() {
+            if (!getCookie("updateClicked")) {
+                document.getElementById("notification").style.display = "block";
+            }
+        }
+    </script>
+</body>
+
 
     <script>
         // Prompt the user for a password
