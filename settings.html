@@ -64,6 +64,7 @@
     <p>Manage your website settings below.</p>
 
     <button class="button" onclick="deleteCookies()">Delete ALL DATA</button>
+    <button class="button" onclick="checkURL()">Check For Update</button>
 
     <div id="cookieNotification" class="notification">
         All cookies have been deleted.
@@ -86,9 +87,8 @@
             setTimeout(() => {
                 notification.className = notification.className.replace("show", "");
             }, 3000);
-            
-            <button onclick="checkURL()">Check For Update</button>
-    <script>
+        }
+
         async function checkURL() {
             const url = "https://ethandupe.github.io/wordupdater.html"; // Set your URL here
             const targetWord = "yes"; // Replace "yes" with the word you want to check
@@ -103,12 +103,11 @@
                     alert("Word not found!");
                 }
             } catch (error) {
-                alert("There was an error findiing keyword!");
+                alert("There was an error finding the keyword!");
                 console.error("Error:", error);
             }
         }
     </script>
-  
 
 </body>
 </html>
