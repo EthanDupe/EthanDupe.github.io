@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Page</title>
+    <style>
+        #progressBar {
+            width: 100%;
+            background-color: #f3f3f3;
+        }
+
+        #progress {
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="progressBar">
+        <div id="progress">0%</div>
+    </div>
+
+    <script>
+        function setCookie(name, value, days) {
+            let date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+        }
+
+        function updateProgress() {
+            let progress = document.getElementById("progress");
+            let width = 0;
+            let interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setCookie("updateCompleted", "true", 1);
+                    window.location.href = "newpage.html";
+                } else {
+                    width++;
+                    progress.style.width = width + '%';
+                    progress.innerHTML = width + '%';
+                }
+            }, 50); // Adjust the interval to control the speed of the progress bar
+        }
+
+        window.onload = updateProgress;
+    </script>
+</body>
+</html>
