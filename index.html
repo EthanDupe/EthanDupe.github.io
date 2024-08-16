@@ -122,6 +122,32 @@
             window.location.href = "https://www.google.com"; // Redirect if the password is incorrect
         }
     </script>
+    <button onclick="dismissNotification()">Dismiss</button>
+
+<script>
+    function dismissNotification() {
+        setCookie("updateDismissed", "true", 1);
+        document.getElementById("notification").style.display = "none";
+    }
+
+    window.onload = function() {
+        if (getCookie("updateCompleted")) {
+            window.location.href = "newpage.html";
+        } else if (!getCookie("updateClicked") && !getCookie("updateDismissed")) {
+            document.getElementById("notification").style.display = "block";
+        }
+    }
+</script>
+<script>
+    window.onload = function() {
+        if (getCookie("updateCompleted")) {
+            window.location.href = "newpage.html";
+        } else if (!getCookie("updateClicked")) {
+            document.getElementById("notification").style.display = "block";
+        }
+    }
+</script>
+
 
 </body>
 </html>
