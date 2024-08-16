@@ -9,7 +9,7 @@
             background-color: #121212;
             color: #f0f0f0;
             font-family: Arial, sans-serif;
-            display: flex; /* Show the content */
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -39,7 +39,7 @@
         .links a:hover {
             color: #ffffff;
         }
-        #notification {
+        #notification, .notification {
             display: none;
             position: fixed;
             top: 10px;
@@ -49,6 +49,55 @@
             padding: 10px;
             border: 1px solid #f5c6cb;
             border-radius: 5px;
+            z-index: 1000;
+        }
+        .notification {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .notification.hide {
+            opacity: 0;
+        }
+        .notification a {
+            color: #FFEB3B; /* Yellow text for the link */
+            text-decoration: underline;
+        }
+        .notification button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: auto;
+        }
+        #countdown {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            z-index: 1000;
+        }
+        #countdown:hover::after {
+            content: "Timer till next update";
+            position: absolute;
+            top: -25px;
+            left: 0;
+            background-color: black;
+            color: white;
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            white-space: nowrap;
+            display: block;
         }
     </style>
 </head>
@@ -63,22 +112,19 @@
         <span>-</span>
         <a href="/chat/index.html">CHAT (BETA)</a>
         <span>-</span>
-       <!-- <a href="https://ethandupe.github.io/settings">Settings (Beta)</a> -->
+        <!-- <a href="https://ethandupe.github.io/settings">Settings (Beta)</a> -->
     </div>
     <div id="notification">
         Update recommended! <button onclick="window.location.href='update.html'">Update Now!</button>
         <button onclick="dismissNotification()">Dismiss</button>
     </div>
+    <div id="countdown"></div>
+    
     <script>
         function dismissNotification() {
             document.getElementById("notification").style.display = "none";
         }
 
-        window.onload = function() {
-            // You can add conditions here if necessary to display the notification
-        }
-    </script>
-    <script>
         function getCookie(name) {
             let cookieArr = document.cookie.split(";");
             for (let i = 0; i < cookieArr.length; i++) {
@@ -90,83 +136,49 @@
             return null;
         }
 
-        window.onload = function() {
-            if (getCookie("updateCompleted") === "true") {
-                // Cookie is set, redirect to newpage.html
-                window.location.href = "newpage.html";
+        function startTimer(duration, redirectUrl) {
+            var countdownElement = document.getElementById('countdown');
+            var endTime = Date.now() + duration;
+
+            function updateCountdown() {
+                var now = Date.now();
+                var timeLeft = endTime - now;
+
+                if (timeLeft <= 0) {
+                    countdownElement.textContent = "0:00";
+                    window.location.href = redirectUrl;
+                    return;
+                }
+
+                var minutes = Math.floor(timeLeft / 60000);
+                var seconds = Math.floor((timeLeft % 60000) / 1000);
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                countdownElement.textContent = `${minutes}:${seconds}`;
+
+                requestAnimationFrame(updateCountdown);
             }
-        }
-    </script>
-    <!--NOTIFICATION-->
-    <style>
-        .notification {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            opacity: 1;
-            transition: opacity 0.5s ease-out;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+
+            updateCountdown();
         }
 
-        .notification.hide {
-            opacity: 0;
-        }
+        window.onload = function() {
+            // Handle cookie check and redirection
+            if (getCookie("updateCompleted") === "true") {
+                window.location.href = "newpage.html";
+                return;
+            }
 
-        .notification a {
-            color: #FFEB3B; /* Yellow text for the link */
-            text-decoration: underline;
-        }
+            // Start the countdown timer
+            var duration = 5000; // Change this to your desired time in milliseconds
+            var redirectUrl = 'newpage.html'; // Change this to your desired URL
+            startTimer(duration, redirectUrl);
 
-        .notification button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 5px 10px;
-            margin-left: auto;
-        }
-    </style>
-</head>
-<body>
-    <div id="notification" class="notification">
-        UPDATE NOW <a href="https://ethandupe.github.io/update" target="_blank">UPDATE</a>
-        <button id="close-button">X</button>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const notification = document.getElementById('notification');
-            const closeButton = document.getElementById('close-button');
-
-            // Set a timeout to hide the notification after 2 minutes
-            const hideNotification = () => {
-                notification.classList.add('hide');
-            };
-
-            setTimeout(hideNotification, 120000); // 120000 milliseconds = 2 minutes
-
-            // Add event listener to the close button
-            closeButton.addEventListener('click', () => {
-                hideNotification();
+            // Display notification and handle its timeout
+            document.getElementById('notification').style.display = 'block';
+            document.getElementById('close-button').addEventListener('click', () => {
+                document.getElementById('notification').classList.add('hide');
             });
-        });
-    </script>
-    <script>
-        function reloadPage() {
-            setTimeout(function() {
-                location.reload();
-            }, 600000); // 600000 milliseconds = 10 minutes
         }
-
-        window.onload = reloadPage;
     </script>
 </body>
 </html>
