@@ -39,41 +39,33 @@
         .links a:hover {
             color: #ffffff;
         }
-        #notification, .notification {
+        #notification {
             display: none;
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border: 1px solid #f5c6cb;
+            background-color: #0f0f0f;
+            color: #00ff00;
+            padding: 15px;
+            border: 1px solid #00ff00;
             border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
             z-index: 1000;
+            font-family: 'Courier New', Courier, monospace;
         }
-        .notification {
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .notification.hide {
-            opacity: 0;
-        }
-        .notification a {
-            color: #FFEB3B; /* Yellow text for the link */
-            text-decoration: underline;
-        }
-        .notification button {
+        #notification button {
             background: none;
-            border: none;
-            color: white;
+            border: 1px solid #00ff00;
+            color: #00ff00;
             font-size: 16px;
             cursor: pointer;
             padding: 5px 10px;
-            margin-left: auto;
+            margin-left: 10px;
+            transition: background 0.3s, color 0.3s;
+        }
+        #notification button:hover {
+            background: #00ff00;
+            color: #121212;
         }
     </style>
 </head>
@@ -119,10 +111,13 @@
             }
 
             // Display notification
-            document.getElementById('notification').style.display = 'block';
-            document.getElementById('close-button').addEventListener('click', () => {
-                document.getElementById('notification').classList.add('hide');
-            });
+            let notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            
+            // Automatically dismiss notification after 2 minutes
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 120000);
         }
     </script>
 </body>
