@@ -62,9 +62,6 @@
     </div>
 
     <script>
-        let hasRestarted = false; // Flag to track if restart has happened
-        let intervalId;
-
         function checkForUpdate() {
             const url = 'https://ethandupe.github.io/wordupdater'; // Replace with your update check URL
 
@@ -88,6 +85,7 @@
             let notification = document.getElementById("notification");
             let width = 0;
             let hasRestarted = false; // Flag to track progress restart
+            let intervalId;
             let duration = Math.floor(Math.random() * 5000) + 5000; // Random duration between 5 and 10 seconds
 
             function startProgress() {
