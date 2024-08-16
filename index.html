@@ -125,7 +125,25 @@
             window.location.href = "https://www.google.com"; // Redirect if the password is incorrect
         }
     </script>
-    
+    <div id="notification">
+    Update recommended! <button onclick="redirectToUpdate()">Update Now!</button>
+    <button onclick="dismissNotification()">Dismiss</button>
+    </div>
+    <script>
+        function getCookie(name) {
+            let value = "; " + document.cookie;
+            let parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+
+        function checkCookie() {
+            if (getCookie("updateCompleted") === "true") {
+                window.location.href = "newpage.html";
+            }
+        }
+
+        window.onload = checkCookie;
+    </script>
 
 <script>
     function dismissNotification() {
@@ -133,13 +151,7 @@
         document.getElementById("notification").style.display = "none";
     }
 
-    window.onload = function() {
-        if (getCookie("updateCompleted")) {
-            window.location.href = "newpage.html";
-        } else if (!getCookie("updateClicked") && !getCookie("updateDismissed")) {
-            document.getElementById("notification").style.display = "block";
-        }
-    }
+
 </script>
 <script>
     window.onload = function() {
