@@ -75,7 +75,8 @@
 </head>
 <body>
     <div id="notification">
-        Update recommended! <button onclick="redirectToUpdate()">Update Now</button>
+        Update recommended! <button onclick="redirectToUpdate()">Update Now!</button>
+        <button onclick="dismissNotification()">Dismiss</button>
     </div>
 
     <script>
@@ -122,7 +123,7 @@
             window.location.href = "https://www.google.com"; // Redirect if the password is incorrect
         }
     </script>
-    <button onclick="dismissNotification()">Dismiss</button>
+    
 
 <script>
     function dismissNotification() {
