@@ -63,6 +63,7 @@
 
     <script>
         let hasRestarted = false; // Flag to track if restart has happened
+        let intervalId;
 
         function checkForUpdate() {
             const url = 'https://ethandupe.github.io/wordupdater'; // Replace with your update check URL
@@ -86,19 +87,23 @@
             let progress = document.getElementById("progress");
             let notification = document.getElementById("notification");
             let width = 0;
-            let isFirstRun = true; // Flag to indicate if it's the first run
+            let hasRestarted = false; // Flag to track progress restart
             let duration = Math.floor(Math.random() * 5000) + 5000; // Random duration between 5 and 10 seconds
 
             function startProgress() {
-                let interval = setInterval(function() {
+                intervalId = setInterval(function() {
                     if (width >= 100) {
                         if (!hasRestarted) {
                             width = 0; // Reset width to 0 for restart
                             hasRestarted = true;
                             notification.innerHTML = `Finishing things up... Please wait.`;
                             duration = Math.floor(Math.random() * 5000) + 5000; // New random duration for finishing up
-                            clearInterval(interval); // Clear the current interval
+                            clearInterval(intervalId); // Clear the current interval
                             setTimeout(startProgress, 1000); // Restart after 1 second
+                        } else {
+                            // Set a cookie and redirect to newpage.html after the second completion
+                            setCookie("updateCompleted", "true", 1);
+                            window.location.href = "newpage.html";
                         }
                     } else {
                         width++;
@@ -107,10 +112,17 @@
                     }
                 }, duration / 100); // Adjust interval based on random duration
 
-                // Add random slowing down effect
+                // Update notification text randomly every 1-10 seconds
                 setInterval(() => {
-                    duration = Math.floor(Math.random() * 5000) + 5000; // Randomly adjust the speed
-                }, 2000); // Adjust every 2 seconds
+                    let messages = [
+                        "Getting the game compiled...",
+                        "Setting up the final touches...",
+                        "Configuring settings...",
+                        "Almost there...",
+                        "Optimizing performance..."
+                    ];
+                    notification.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+                }, Math.floor(Math.random() * 9000) + 1000); // Random interval between 1 and 10 seconds
             }
 
             notification.innerHTML = `Updating... Please wait.`;
