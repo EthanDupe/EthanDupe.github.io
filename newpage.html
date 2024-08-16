@@ -54,23 +54,6 @@
             margin-bottom: 5px;
             word-wrap: break-word;
         }
-        .dark-theme {
-            background-color: #121212;
-            color: #f0f0f0;
-        }
-        .light-theme {
-            background-color: #f0f0f0;
-            color: #121212;
-        }
-        .theme-button {
-            margin-top: 1em;
-            padding: 10px;
-            background-color: #00ff00;
-            color: #121212;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -86,17 +69,10 @@
         <span>-</span>
         <a href="settings.html">Settings (Beta)</a>
     </div>
-    <button class="theme-button" onclick="setTheme('dark')">Dark Theme</button>
-    <button class="theme-button" onclick="setTheme('light')">Light Theme</button>
     <button onclick="fetchDocument()">Fetch Document</button>
     <div id="notification-container"></div>
 
     <script>
-        function setTheme(theme) {
-            document.body.className = theme + '-theme';
-            document.cookie = "theme=" + theme + "; path=/";
-        }
-
         async function fetchDocument() {
             const url = 'your-document-url.txt'; // Replace with your document URL
             const response = await fetch(url);
