@@ -10,11 +10,11 @@
             color: #00ff00;
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
-            overflow: hidden;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         .matrix {
             position: absolute;
@@ -31,17 +31,22 @@
             width: 100%;
             height: 100%;
         }
-        .gallery {
+        .gallery-container {
             position: relative;
             z-index: 1;
+            overflow-y: auto;
+            max-height: 90vh;
+            width: 90%;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 10px;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid #00ff00;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         .gallery img {
             width: 100%;
@@ -58,19 +63,21 @@
 </head>
 <body>
     <canvas class="matrix-canvas"></canvas>
-    <div class="gallery">
-        <img src="IMG_4465.jpeg" alt="Photo 1">
-        <img src="IMG_4281.jpeg" alt="Photo 2">
-        <img src="IMG_4273.jpeg" alt="Photo 3">
-        <img src="IMG_4258.jpeg" alt="Photo 4">
-        <img src="IMG_4055.jpeg" alt="Photo 5">
-        <img src="IMG_4058.jpeg" alt="Photo 6">
-        <img src="IMG_4036.jpeg" alt="Photo 7">
-        <img src="IMG_4040.jpeg" alt="Photo 8">
-        <img src="IMG_4013.jpeg" alt="Photo 9">
-        <img src="IMG_3885.dng" alt="Photo 10">
-        <img src="IMG_3886.dng" alt="Photo 11">
-        <img src="IMG_3862.jpeg" alt="Photo 12">
+    <div class="gallery-container">
+        <div class="gallery">
+            <img src="/photography/IMG_4465.jpeg" alt="Photo 1">
+            <img src="/photography/IMG_4281.jpeg" alt="Photo 2">
+            <img src="/photography/IMG_4273.jpeg" alt="Photo 3">
+            <img src="/photography/IMG_4258.jpeg" alt="Photo 4">
+            <img src="/photography/IMG_4055.jpeg" alt="Photo 5">
+            <img src="/photography/IMG_4058.jpeg" alt="Photo 6">
+            <img src="/photography/IMG_4036.jpeg" alt="Photo 7">
+            <img src="/photography/IMG_4040.jpeg" alt="Photo 8">
+            <img src="/photography/IMG_4013.jpeg" alt="Photo 9">
+            <img src="/photography/IMG_3885.dng" alt="Photo 10">
+            <img src="/photography/IMG_3886.dng" alt="Photo 11">
+            <img src="/photography/IMG_3862.jpeg" alt="Photo 12">
+        </div>
     </div>
 
     <script>
