@@ -78,5 +78,24 @@
             // You can add conditions here if necessary to display the notification
         }
     </script>
+    <script>
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(";");
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split("=");
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        window.onload = function() {
+            if (getCookie("updateCompleted") === "true") {
+                // Cookie is set, redirect to newpage.html
+                window.location.href = "newpage.html";
+            }
+        }
+    </script>
 </body>
 </html>
