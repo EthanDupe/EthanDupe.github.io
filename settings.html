@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .button {
+            background-color: #00ff00;
+            color: #121212;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            background-color: #00cc00;
+        }
+        .notification {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #00ff00;
+            color: #121212;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1em;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .notification.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Settings</h1>
+    <p>Manage your website settings below.</p>
+
+    <button class="button" onclick="deleteCookies()">Delete Cookies</button>
+
+    <div id="cookieNotification" class="notification">
+        All cookies have been deleted.
+    </div>
+
+    <script>
+        function deleteCookies() {
+            const cookies = document.cookie.split("; ");
+            for (let cookie of cookies) {
+                const eqPos = cookie.indexOf("=");
+                const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            }
+            showNotification();
+        }
+
+        function showNotification() {
+            const notification = document.getElementById("cookieNotification");
+            notification.className = "notification show";
+            setTimeout(() => {
+                notification.className = notification.className.replace("show", "");
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
