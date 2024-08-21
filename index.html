@@ -9,13 +9,19 @@
             background-color: #121212;
             color: #f0f0f0;
             font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
+            position: relative;
+        }
+        h1, p, .links {
+            position: relative;
+            z-index: 1;
         }
         h1 {
             font-size: 3em;
@@ -44,14 +50,15 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #0f0f0f;
+            background-color: #000000;
             color: #00ff00;
-            padding: 15px;
+            padding: 10px;
             border: 1px solid #00ff00;
             border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.8);
             z-index: 1000;
             font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
         }
         #notification button {
             background: none;
@@ -67,24 +74,54 @@
             background: #00ff00;
             color: #121212;
         }
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .content-box {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome To A70M Web</h1>
-    <p>This Website is undergoing multiple stages for testing. Please be patient.</p>
-    <p>Other things:</p>
-    <div class="links">
-        <a href="/chilibowlflash-2/">Educational Stuff</a>
-        <span>-</span>
-        <a href="/ruffle/index.html">Ruffle Emu (BETA)</a>
-        <span>-</span>
-        <a href="/chat/index.html">CHAT (BETA)</a>
-        <span>-</span>
-        <!-- <a href="https://ethandupe.github.io/settings">Settings (Beta)</a> -->
+    <canvas class="matrix-canvas"></canvas>
+    <div class="content-box">
+        <h1>Welcome To A70M Web</h1>
+        <p>This Website is undergoing multiple stages for testing. Please be patient.</p>
+        <p>Other things:</p>
+        <div class="links">
+            <a href="/chilibowlflash-2/">Educational Stuff</a>
+            <span>-</span>
+            <a href="/EmuJS/index.html">Emu JS</a>
+            <span>-</span>
+            <a href="/ruffle/index.html">Ruffle Emu (BETA)</a>
+            <span>-</span>
+     <a href="/movies.html">Movies</a>
+            <span>-</span>
+            <a href="/chat/index.html">CHAT (BETA)</a>
+            <span>-</span>
+            <a href="https://ethandupe.github.io/settings">Settings (Beta)</a>
+        </div>
     </div>
     <div id="notification">
-        Update recommended! <button onclick="window.location.href='update.html'">Update Now!</button>
-        <button onclick="dismissNotification()">Dismiss</button>
+        Welcome to A70M Web! <button onclick="dismissNotification()">Dismiss</button>
     </div>
     
     <script>
@@ -92,24 +129,7 @@
             document.getElementById("notification").style.display = "none";
         }
 
-        function getCookie(name) {
-            let cookieArr = document.cookie.split(";");
-            for (let i = 0; i < cookieArr.length; i++) {
-                let cookiePair = cookieArr[i].split("=");
-                if (name == cookiePair[0].trim()) {
-                    return decodeURIComponent(cookiePair[1]);
-                }
-            }
-            return null;
-        }
-
         window.onload = function() {
-            // Handle cookie check and redirection
-            if (getCookie("updateCompleted") === "true") {
-                window.location.href = "newpage.html";
-                return;
-            }
-
             // Display notification
             let notification = document.getElementById('notification');
             notification.style.display = 'block';
@@ -118,6 +138,40 @@
             setTimeout(() => {
                 notification.style.display = 'none';
             }, 120000);
+
+            // Matrix effect
+            const canvas = document.querySelector('.matrix-canvas');
+            const ctx = canvas.getContext('2d');
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'.split('');
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            const drops = Array(Math.floor(columns)).fill(1);
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                drops.length = Math.floor(canvas.width / fontSize);
+                drops.fill(1);
+            }
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            setInterval(drawMatrix, 33);
         }
     </script>
 </body>
