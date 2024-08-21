@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Button</title>
+    <title>Hacker Download Buttons</title>
     <style>
         body {
             background-color: #000;
             color: #00ff00;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -18,6 +19,7 @@
 
         .hacker-container {
             text-align: center;
+            margin-bottom: 20px;
             position: relative;
         }
 
@@ -83,22 +85,40 @@
 <body>
 
     <div class="hacker-container">
-        <a href="https://drive.google.com/file/d/0B5hAdgAsacmwZ1BsQUdvaWFUNHc/view?usp=drivesdk&resourcekey=0-TUBPFHJQP6Wt2YldrenqIg" download id="download-button">
+        <a href="https://drive.google.com/file/d/0B5hAdgAsacmwZ1BsQUdvaWFUNHc/view?usp=drivesdk&resourcekey=0-TUBPFHJQP6Wt2YldrenqIg" download>
             <button class="hacker-button">Download File</button>
-        </a> 
-<div class="hacker-container">
-        <a href="https://drive.google.com/file/d/0B3Oy5ahf02mFZU1KMG0xM0FYQXM/view?usp=drivesdk&resourcekey=0-Mq9TLnk81W8W37eLt6Qelw"   download id="download-button">
-            <button class="hacker-button">Download File</button>
+        </a>
+    </div>
+
+    <div class="hacker-container">
+        <a href="https://drive.google.com/file/d/0B3Oy5ahf02mFZU1KMG0xM0FYQXM/view?usp=drivesdk&resourcekey=0-Mq9TLnk81W8W37eLt6Qelw" download>
+            <button class="hacker-button">Download trolls</button>
+        </a>
+    </div>
+
+    <div class="hacker-container">
+        <a href="https://drive.google.com/file/d/1u-gH-m_JcMpcADU7jxpYoSkvUJytyhrw/view?usp=drivesdk" download>
+            <button class="hacker-button">Download loana</button>
+        </a>
+    </div>
+
+    <div class="hacker-container">
+        <a href="https://drive.google.com/file/d/1giVtzRfVlw53pKePp1nIMulrFjsKIKkT/view?usp=drivesdk" download>
+            <button class="hacker-button">Download KIKkT</button>
         </a>
         <div id="glitch-text">SYSTEM INITIATED</div>
     </div>
 
     <script>
-        document.getElementById("download-button").addEventListener("click", function() {
-            var glitchText = document.getElementById("glitch-text");
-            glitchText.classList.add("glitch");
+        const downloadButtons = document.querySelectorAll("a[id='download-button']");
+
+        downloadButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                var glitchText = document.getElementById("glitch-text");
+                glitchText.classList.add("glitch");
+            });
         });
     </script>
-    
+
 </body>
 </html>
