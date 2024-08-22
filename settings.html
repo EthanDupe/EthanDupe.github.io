@@ -100,10 +100,10 @@
                 if (text.includes(targetWord)) {
                     window.location.href = "https://ethandupe.github.io/update.html"; // Replace with your redirect URL
                 } else {
-                    alert("Word not found!");
+                    window.location.href = "https://ethandupe.github.io/noupdate.html";
                 }
             } catch (error) {
-                alert("There was an error finding the keyword!");
+                alert("There was an error finding the server!");
                 console.error("Error:", error);
             }
         }
