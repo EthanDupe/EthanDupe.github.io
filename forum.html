@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Forum Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .forum-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .post-form {
+            margin-bottom: 20px;
+        }
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="forum-header">
+        <h1>Welcome to the Simple Forum</h1>
+        <p id="welcome-message"></p>
+    </div>
+
+    <div class="post-form">
+        <form id="nameForm">
+            <label for="username">Enter your name: </label>
+            <input type="text" id="username" required>
+            <button type="submit">Set Name</button>
+        </form>
+
+        <form id="postForm" style="display: none;">
+            <label for="message">Your message: </label>
+            <textarea id="message" required></textarea>
+            <button type="submit">Post Message</button>
+        </form>
+    </div>
+
+    <div class="forum-posts">
+        <h2>Forum Posts</h2>
+        <div id="posts-container"></div>
+    </div>
+
+    <script>
+        const backendUrl = 'https://your-glitch-project.glitch.me'; // Replace with your Glitch project URL
+
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Function to get a cookie
+        function getCookie(name) {
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookies = decodedCookie.split(';');
+            for(let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i];
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+                if (cookie.indexOf(name + "=") === 0) {
+                    return cookie.substring(name.length + 1, cookie.length);
+                }
+            }
+            return "";
+        }
+
+        // Handle form submission to set the cookie
+        document.getElementById('nameForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            setCookie('username', username, 7); // Cookie expires in 7 days
+            displayWelcomeMessage();
+            document.getElementById('postForm').style.display = 'block';
+        });
+
+        // Handle post form submission
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = document.getElementById('message').value;
+            const username = getCookie('username');
+            if (username && message) {
+                postMessage(username, message);
+            }
+        });
+
+        // Fetch posts from the backend and display them
+        function fetchPosts() {
+            fetch(`${backendUrl}/api/posts`)
+                .then(response => response.json())
+                .then(data => {
+                    const postsContainer = document.getElementById('posts-container');
+                    postsContainer.innerHTML = '';
+                    data.posts.forEach(post => {
+                        const postElement = document.createElement('div');
+                        postElement.className = 'post';
+                        postElement.innerHTML = `<h3>${post.username}</h3><p>${post.message}</p>`;
+                        postsContainer.appendChild(postElement);
+                    });
+                });
+        }
+
+        // Post a new message to the backend
+        function postMessage(username, message) {
+            fetch(`${backendUrl}/api/posts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').value = '';
+                fetchPosts(); // Refresh the list of posts
+            });
+        }
+
+        // Display a welcome message using the cookie value
+        function displayWelcomeMessage() {
+            const username = getCookie('username');
+            if (username) {
+                document.getElementById('welcome-message').innerText = 'Hello, ' + username + '! Welcome to the forum.';
+                document.getElementById('postForm').style.display = 'block';
+            } else {
+                document.getElementById('welcome-message').innerText = 'Please enter your name to join the forum.';
+                document.getElementById('postForm').style.display = 'none';
+            }
+        }
+
+        // On page load, display the welcome message and fetch posts
+        displayWelcomeMessage();
+        fetchPosts();
+    </script>
+</body>
+</html>
