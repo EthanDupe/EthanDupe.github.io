@@ -1,85 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Slow-Response Chatbot</title>
-    <style>
-        .chat-container {
-            width: 400px;
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-        }
+  <title>Simple Chatbot</title>
+  <style>
+    .chat-container {
+      width: 400px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
 
-        .chat-history {
-            height: 300px;
-            overflow-y: scroll;
-        }
+    .chat-history {
+      height: 300px;
+      overflow-y: scroll;
+    }
 
-        .user-message {
-            background-color: #f2f2f2;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
+    .user-message, .bot-message {
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
 
-        .bot-message {
-            background-color: #e0e0e0;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
+    .user-message {
+      background-color: #f2f2f2;
+    }
+
+    .bot-message {
+      background-color: #e0e0e0;
+    }
+  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-history"></div>
-        <div class="user-input">
-            <input type="text" id="user-message" placeholder="Type your message">
-            <button onclick="sendMessage()">Send</button>
-        </div>
+  <div class="chat-container">
+    <div class="chat-history"></div>
+    <div class="user-input">
+      <input type="text" id="user-message" placeholder="Type your message">
+      <button onclick="sendMessage()">Send</button>
     </div>
-    <script>
-        function sendMessage() {
-            const message = document.getElementById('user-message').value;
-            const chatHistory = document.querySelector('.chat-history');
+  </div>
+  <script>
+    const responses = {
+      "hello": "Hello! How can I help you today?",
+      "how are you": "I'm doing well, thank you. How are you?",
+      "what's the weather": "I can't tell you the weather, but you can check a weather website.",
+      // Add more questions and responses here
+    };
 
-            // Display user message
-            const userMessage = document.createElement('div');
-            userMessage.classList.add('user-message');
-            userMessage.textContent = `You: ${message}`;
-            chatHistory.appendChild(userMessage);
+    function sendMessage() {
+      const message = document.getElementById('user-message').value;
+      const chatHistory = document.querySelector('.chat-history');
 
-            // Simulate processing time and display bot response
-            setTimeout(() => {
-                fetch('/api/get_response', {
-                    method: 'POST',
-                    body: JSON.stringify({ message: message })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const botMessage = document.createElement('div');
-                    botMessage.classList.add('bot-message');
-                    botMessage.textContent = `Bot: ${data.response}`;
-                    chatHistory.appendChild(botMessage);
-                })
-                .catch(error => {
-                    console.error('Error fetching response:', error);
-                    const errorMessage = document.createElement('div');
-                    errorMessage.classList.add('error-message');
-                    errorMessage.textContent = 'Error fetching response. Please try again later.';
-                    chatHistory.appendChild(errorMessage);
-                });
+      // Display user message
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('user-message');
+      userMessage.textContent = `You: ${message}`;
+      chatHistory.appendChild(userMessage);
 
-                // Clear the input field
-                document.getElementById('user-message').value = '';
-            }, 2000); // Adjust delay time as needed
-        }
-    </script>
+      // Simulate processing time and display bot response
+      setTimeout(() => {
+        const botMessage = document.createElement('div');
+        botMessage.classList.add('bot-message');
+
+        // Check if the user's message matches a key in the responses object
+        const response = responses[message.toLowerCase()] || "I didn't understand. Please try asking something else.";
+        botMessage.textContent = `Bot: ${response}`;
+
+        chatHistory.appendChild(botMessage);
+
+        // Clear the input field
+        document.getElementById('user-message').value = '';
+      }, 1000); // Adjust delay time as needed
+    }
+  </script>
 </body>
 </html>
