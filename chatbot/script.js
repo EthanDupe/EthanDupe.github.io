@@ -1,63 +1,65 @@
-// Load JSON File
+// Load Responses from JSON
 let botResponses;
 fetch('responses.json')
-  .then(response => response.json())
-  .then(data => botResponses = data.responses);
+  .then((response) => response.json())
+  .then((data) => (botResponses = data.responses));
 
 // DOM Elements
 const messagesDiv = document.getElementById('messages');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 
-// Event Listeners
+// Add Event Listeners
 sendBtn.addEventListener('click', handleUserMessage);
-userInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') handleUserMessage();
+userInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') handleUserMessage();
 });
 
-// Handle User Message
+// Handle User Input
 function handleUserMessage() {
-  const message = userInput.value.trim();
-  if (message === '') return;
+  const userMessage = userInput.value.trim();
+  if (!userMessage) return;
 
-  addMessage(message, 'user');
+  // Display User Message
+  addMessage(userMessage, 'user');
   userInput.value = '';
 
-  // Bot Typing Indicator
-  addLoadingIndicator();
+  // Display Typing Indicator
+  showTypingIndicator();
 
   setTimeout(() => {
-    removeLoadingIndicator();
-    const response = botResponses[message.toLowerCase()] || botResponses['default'];
-    addMessage(response, 'bot');
+    removeTypingIndicator();
+
+    // Fetch Bot Response
+    const botMessage =
+      botResponses[userMessage.toLowerCase()] || botResponses['default'];
+    addMessage(botMessage, 'bot');
   }, 1000);
 }
 
-// Add Message to Chat
-function addMessage(text, type) {
+// Add Message
+function addMessage(message, type) {
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message', `${type}-message`);
-  messageDiv.textContent = text;
+  messageDiv.textContent = message;
   messagesDiv.appendChild(messageDiv);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Add Loading Indicator
-function addLoadingIndicator() {
-  const loadingDiv = document.createElement('div');
-  loadingDiv.classList.add('message', 'bot-message', 'loading');
-  loadingDiv.id = 'loading';
-  loadingDiv.innerHTML = `
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
+// Show Typing Indicator
+function showTypingIndicator() {
+  const typingDiv = document.createElement('div');
+  typingDiv.classList.add('message', 'bot-message', 'typing-indicator');
+  typingDiv.innerHTML = `
+    <div></div><div></div><div></div>
   `;
-  messagesDiv.appendChild(loadingDiv);
+  typingDiv.id = 'typing';
+  messagesDiv.appendChild(typingDiv);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Remove Loading Indicator
-function removeLoadingIndicator() {
-  const loadingDiv = document.getElementById('loading');
-  if (loadingDiv) messagesDiv.removeChild(loadingDiv);
+// Remove Typing Indicator
+function removeTypingIndicator() {
+  const typingDiv = document.getElementById('typing');
+  if (typingDiv) typingDiv.remove();
 }
