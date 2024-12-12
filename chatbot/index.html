@@ -3,25 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Chat</title>
+  <title>AI Chatbot</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="background"></div>
-  <div id="chat-app">
-    <header id="chat-header">
-      <h1>ChatBuddy</h1>
-    </header>
-    <main id="chat-box">
-      <div id="messages"></div>
-    </main>
-    <footer id="input-container">
-      <input type="text" id="user-input" placeholder="Type a message..." autofocus>
-      <button id="send-btn">
-        <span>Send</span>
-      </button>
-    </footer>
+  <div id="background"></div> <!-- Moving background -->
+
+  <div id="chat-container">
+    <div id="messages"></div> <!-- Chat messages will go here -->
+    <div id="user-input-container">
+      <input type="text" id="user-input" placeholder="Type a message..." />
+      <button id="send-btn">Send</button>
+    </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
