@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slow-Response Chatbot</title>
+    <style>
+        .chat-container {
+            width: 400px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .chat-history {
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        .user-message {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .bot-message {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-history"></div>
+        <div class="user-input">
+            <input type="text" id="user-message" placeholder="Type your message">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        function sendMessage() {
+            const message = document.getElementById('user-message').value;
+            const chatHistory = document.querySelector('.chat-history');
+
+            // Display user message
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('user-message');
+            userMessage.textContent = `You: ${message}`;
+            chatHistory.appendChild(userMessage);
+
+            // Simulate processing time and display bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.classList.add('bot-message');
+                botMessage.textContent = `Bot: ${generateBotResponse(message)}`;
+                chatHistory.appendChild(botMessage);
+
+                // Clear the input field
+                document.getElementById('user-message').value = '';
+            }, 2000); // Adjust delay time as needed
+        }
+
+        function generateBotResponse(message) {
+            // Replace this with your desired response generation logic
+            // For now, let's keep it simple:
+            return "I'm thinking... 🤔";
+        }
+    </script>
+</body>
+</html>
