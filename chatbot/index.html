@@ -7,14 +7,19 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="chat-container">
-    <div id="chat-box">
+  <div id="chat-app">
+    <header id="chat-header">
+      <h1>ChatBuddy</h1>
+    </header>
+    <main id="chat-box">
       <div id="messages"></div>
-    </div>
-    <div id="input-container">
-      <input type="text" id="user-input" placeholder="Type your message...">
-      <button id="send-btn">Send</button>
-    </div>
+    </main>
+    <footer id="input-container">
+      <input type="text" id="user-input" placeholder="Type a message..." autofocus>
+      <button id="send-btn">
+        <span>➤</span>
+      </button>
+    </footer>
   </div>
   <script src="script.js"></script>
 </body>
