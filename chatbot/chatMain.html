@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple Chatbot</title>
-  <style>
-    /* ... your CSS styles */
-  </style>
+  <title>Chatbot</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="chat-container">
@@ -14,25 +12,6 @@
       <button onclick="sendMessage()">Send</button>
     </div>
   </div>
-  <script>
-    fetch('responses.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch responses.json');
-        }
-        return response.json();
-      })
-      .then(data => {
-        const responses = data;
-
-        function sendMessage() {
-          // ... rest of your sendMessage function
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching responses:', error);
-        alert('An error occurred while fetching responses. Please try again later.');
-      });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
