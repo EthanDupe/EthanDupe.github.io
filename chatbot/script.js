@@ -1,57 +1,47 @@
-fetch('responses.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Failed to fetch responses.json: ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    const responses = data;
+// Select elements
+const chatHistory = document.getElementById('chat-history');
+const userMessageInput = document.getElementById('user-message');
+const sendButton = document.getElementById('send-button');
 
-    function sendMessage() {
-      const message = document.getElementById('user-message').value;
-      const chatHistory = document.querySelector('.chat-history');
+// AI Response Logic
+function getAIResponse(userMessage) {
+    // Simulate a delay for AI response
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(`You said: "${userMessage}". How can I assist you further?`);
+        }, 1000); // Delay for 1 second
+    });
+}
 
-      // Display user message
-      const userMessage = document.createElement('div');
-      userMessage.classList.add('user-message', 'message');
-      userMessage.textContent = `You: ${message}`;
-      chatHistory.appendChild(userMessage);
+// Add message to chat history
+function addMessage(message, isUser) {
+    const messageBubble = document.createElement('div');
+    messageBubble.className = `chat-message ${isUser ? 'user-message' : 'ai-message'}`;
+    messageBubble.textContent = message;
+    chatHistory.appendChild(messageBubble);
 
-      // Display typing indicator
-      const typingIndicator = document.createElement('div');
-      typingIndicator.classList.add('typing-indicator');
-      chatHistory.appendChild(typingIndicator);
+    // Scroll to the bottom of chat
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+}
 
-      // Simulate processing time and display bot response
-      setTimeout(() => {
-        typingIndicator.remove();
+// Handle Send Button Click
+async function sendMessage() {
+    const userMessage = userMessageInput.value.trim();
+    if (!userMessage) return;
 
-        const botMessage = document.createElement('div');
-        botMessage.classList.add('bot-message', 'message');
+    // Add user message to chat
+    addMessage(userMessage, true);
 
-        // Check if the user's message matches a key in the responses object
-        const response = responses[message.toLowerCase()] || "I didn't understand. Please try asking something else.";
+    // Clear the input field
+    userMessageInput.value = '';
 
-        // Simulate typing effect
-        let i = 0;
-        const interval = setInterval(() => {
-          botMessage.textContent += response[i];
-          i++;
-          if (i === response.length) {
-            clearInterval(interval);
-          }
-        }, 50); // Adjust delay as needed
+    // Get and display AI response
+    const aiResponse = await getAIResponse(userMessage);
+    addMessage(aiResponse, false);
+}
 
-        chatHistory.appendChild(botMessage);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-
-        // Clear the input field
-        document.getElementById('user-message').value = '';
-      }, 1000); // Adjust delay time as needed
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching responses:', error);
-    alert('An error occurred while fetching responses. Please check your network connection or the JSON file and try again.');
-  });
+// Event Listeners
+sendButton.addEventListener('click', sendMessage);
+userMessageInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
