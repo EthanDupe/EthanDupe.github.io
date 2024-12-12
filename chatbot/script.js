@@ -1,5 +1,10 @@
 fetch('responses.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Failed to fetch responses.json: ${response.statusText}`);
+    }
+    return response.json();
+  })
   .then(data => {
     const responses = data;
 
@@ -39,7 +44,7 @@ fetch('responses.json')
         }, 50); // Adjust delay as needed
 
         chatHistory.appendChild(botMessage);
-        chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to bottom
+        chatHistory.scrollTop = chatHistory.scrollHeight;
 
         // Clear the input field
         document.getElementById('user-message').value = '';
@@ -48,5 +53,5 @@ fetch('responses.json')
   })
   .catch(error => {
     console.error('Error fetching responses:', error);
-    alert('Error fetching responses. Please check your network connection and try again.');
+    alert('An error occurred while fetching responses. Please check your network connection or the JSON file and try again.');
   });
