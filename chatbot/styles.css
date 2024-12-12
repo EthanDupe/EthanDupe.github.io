@@ -1,65 +1,161 @@
-// Load Responses from JSON
-let botResponses;
-fetch('responses.json')
-  .then((response) => response.json())
-  .then((data) => (botResponses = data.responses));
-
-// DOM Elements
-const messagesDiv = document.getElementById('messages');
-const userInput = document.getElementById('user-input');
-const sendBtn = document.getElementById('send-btn');
-
-// Add Event Listeners
-sendBtn.addEventListener('click', handleUserMessage);
-userInput.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') handleUserMessage();
-});
-
-// Handle User Input
-function handleUserMessage() {
-  const userMessage = userInput.value.trim();
-  if (!userMessage) return;
-
-  // Display User Message
-  addMessage(userMessage, 'user');
-  userInput.value = '';
-
-  // Display Typing Indicator
-  showTypingIndicator();
-
-  setTimeout(() => {
-    removeTypingIndicator();
-
-    // Fetch Bot Response
-    const botMessage =
-      botResponses[userMessage.toLowerCase()] || botResponses['default'];
-    addMessage(botMessage, 'bot');
-  }, 1000);
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1f2a44;
+  overflow: hidden;
 }
 
-// Add Message
-function addMessage(message, type) {
-  const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', `${type}-message`);
-  messageDiv.textContent = message;
-  messagesDiv.appendChild(messageDiv);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+/* Background Animation */
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #3b4c78, #4a6a9a);  /* Darker Blue */
+  z-index: -1;
+  overflow: hidden;
 }
 
-// Show Typing Indicator
-function showTypingIndicator() {
-  const typingDiv = document.createElement('div');
-  typingDiv.classList.add('message', 'bot-message', 'typing-indicator');
-  typingDiv.innerHTML = `
-    <div></div><div></div><div></div>
-  `;
-  typingDiv.id = 'typing';
-  messagesDiv.appendChild(typingDiv);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+#background::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent); /* Slightly darker background */
+  transform: translate(-50%, -50%);
+  animation: moveBackground 10s linear infinite;
 }
 
-// Remove Typing Indicator
-function removeTypingIndicator() {
-  const typingDiv = document.getElementById('typing');
-  if (typingDiv) typingDiv.remove();
+@keyframes moveBackground {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-55%, -55%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Chat Container */
+#chat-container {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+/* Messages */
+#messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 75%;
+}
+
+.user-message {
+  background-color: #4a90e2;
+  color: white;
+  align-self: flex-end;
+}
+
+.bot-message {
+  background-color: #2c3e50;
+  color: white;
+  align-self: flex-start;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.typing-indicator div {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: typing 1.2s infinite ease-in-out;
+}
+
+.typing-indicator div:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* User Input */
+#user-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#user-input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #2c3e50;
+  color: white;
+}
+
+#send-btn {
+  width: 15%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#send-btn:hover {
+  background-color: #2980b9;
+}
+
+#send-btn:active {
+  background-color: #1c7bb4;
 }
