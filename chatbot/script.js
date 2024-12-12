@@ -11,18 +11,18 @@ async function loadResponses() {
     try {
         const response = await fetch('responses.json');
         responses = await response.json();
+        console.log("Responses loaded:", responses); // Debugging to confirm data
     } catch (error) {
         console.error("Failed to load responses:", error);
     }
 }
 
-// AI Response Logic
+// Match user input with JSON responses
 function getAIResponse(userMessage) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            // Find a response or use the default
-            const messageKey = userMessage.toLowerCase();
-            const aiResponse = responses[messageKey] || responses["default"];
+            const messageKey = userMessage.toLowerCase().trim();
+            const aiResponse = responses.responses[messageKey] || responses.responses["default"];
             resolve(aiResponse);
         }, 1000); // Simulate AI processing delay
     });
@@ -32,7 +32,7 @@ function getAIResponse(userMessage) {
 function addMessage(message, isUser) {
     const messageBubble = document.createElement('div');
     messageBubble.className = `chat-message ${isUser ? 'user-message' : 'ai-message'}`;
-    messageBubble.textContent = message;
+    messageBubble.textContent = message; // Set message content
     chatHistory.appendChild(messageBubble);
 
     // Scroll to the bottom of chat
@@ -52,6 +52,7 @@ async function sendMessage() {
 
     // Get and display AI response
     const aiResponse = await getAIResponse(userMessage);
+    console.log("AI Response:", aiResponse); // Debugging to ensure response is fetched
     addMessage(aiResponse, false);
 }
 
