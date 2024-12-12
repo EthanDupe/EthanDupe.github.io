@@ -1,0 +1,14 @@
+{
+  "hello": "Hello! How can I help you today?",
+  "how are you": "I'm doing well, thank you. How are you?",
+  "what's the weather": "I can't tell you the weather, but you can check a weather website.",
+  "what time is it": () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedTime = `${hours % 12 || 12}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    return `It is currently ${formattedTime}.`;
+  },
+  // ... more responses
+}
