@@ -3,13 +3,28 @@ const chatHistory = document.getElementById('chat-history');
 const userMessageInput = document.getElementById('user-message');
 const sendButton = document.getElementById('send-button');
 
+// Load preprogrammed responses
+let responses = {};
+
+// Fetch responses from the JSON file
+async function loadResponses() {
+    try {
+        const response = await fetch('responses.json');
+        responses = await response.json();
+    } catch (error) {
+        console.error("Failed to load responses:", error);
+    }
+}
+
 // AI Response Logic
 function getAIResponse(userMessage) {
-    // Simulate a delay for AI response
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(`You said: "${userMessage}". How can I assist you further?`);
-        }, 1000); // Delay for 1 second
+            // Find a response or use the default
+            const messageKey = userMessage.toLowerCase();
+            const aiResponse = responses[messageKey] || responses["default"];
+            resolve(aiResponse);
+        }, 1000); // Simulate AI processing delay
     });
 }
 
@@ -45,3 +60,6 @@ sendButton.addEventListener('click', sendMessage);
 userMessageInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
+
+// Initialize chatbot
+loadResponses();
