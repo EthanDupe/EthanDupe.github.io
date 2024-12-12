@@ -52,20 +52,33 @@
 
             // Simulate processing time and display bot response
             setTimeout(() => {
-                const botMessage = document.createElement('div');
-                botMessage.classList.add('bot-message');
-                botMessage.textContent = `Bot: ${generateBotResponse(message)}`;
-                chatHistory.appendChild(botMessage);
+                fetch('/api/get_response', {
+                    method: 'POST',
+                    body: JSON.stringify({ message: message })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const botMessage = document.createElement('div');
+                    botMessage.classList.add('bot-message');
+                    botMessage.textContent = `Bot: ${data.response}`;
+                    chatHistory.appendChild(botMessage);
+                })
+                .catch(error => {
+                    console.error('Error fetching response:', error);
+                    const errorMessage = document.createElement('div');
+                    errorMessage.classList.add('error-message');
+                    errorMessage.textContent = 'Error fetching response. Please try again later.';
+                    chatHistory.appendChild(errorMessage);
+                });
 
                 // Clear the input field
                 document.getElementById('user-message').value = '';
             }, 2000); // Adjust delay time as needed
-        }
-
-        function generateBotResponse(message) {
-            // Replace this with your desired response generation logic
-            // For now, let's keep it simple:
-            return "I'm thinking... 🤔";
         }
     </script>
 </body>
