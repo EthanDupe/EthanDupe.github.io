@@ -1,66 +1,63 @@
-// Select elements
-const chatHistory = document.getElementById('chat-history');
-const userMessageInput = document.getElementById('user-message');
-const sendButton = document.getElementById('send-button');
+// Load JSON File
+let botResponses;
+fetch('responses.json')
+  .then(response => response.json())
+  .then(data => botResponses = data.responses);
 
-// Load preprogrammed responses
-let responses = {};
-
-// Fetch responses from the JSON file
-async function loadResponses() {
-    try {
-        const response = await fetch('responses.json');
-        responses = await response.json();
-        console.log("Responses loaded:", responses); // Debugging to confirm data
-    } catch (error) {
-        console.error("Failed to load responses:", error);
-    }
-}
-
-// Match user input with JSON responses
-function getAIResponse(userMessage) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const messageKey = userMessage.toLowerCase().trim();
-            const aiResponse = responses.responses[messageKey] || responses.responses["default"];
-            resolve(aiResponse);
-        }, 1000); // Simulate AI processing delay
-    });
-}
-
-// Add message to chat history
-function addMessage(message, isUser) {
-    const messageBubble = document.createElement('div');
-    messageBubble.className = `chat-message ${isUser ? 'user-message' : 'ai-message'}`;
-    messageBubble.textContent = message; // Set message content
-    chatHistory.appendChild(messageBubble);
-
-    // Scroll to the bottom of chat
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-}
-
-// Handle Send Button Click
-async function sendMessage() {
-    const userMessage = userMessageInput.value.trim();
-    if (!userMessage) return;
-
-    // Add user message to chat
-    addMessage(userMessage, true);
-
-    // Clear the input field
-    userMessageInput.value = '';
-
-    // Get and display AI response
-    const aiResponse = await getAIResponse(userMessage);
-    console.log("AI Response:", aiResponse); // Debugging to ensure response is fetched
-    addMessage(aiResponse, false);
-}
+// DOM Elements
+const messagesDiv = document.getElementById('messages');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
 
 // Event Listeners
-sendButton.addEventListener('click', sendMessage);
-userMessageInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMessage();
+sendBtn.addEventListener('click', handleUserMessage);
+userInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') handleUserMessage();
 });
 
-// Initialize chatbot
-loadResponses();
+// Handle User Message
+function handleUserMessage() {
+  const message = userInput.value.trim();
+  if (message === '') return;
+
+  addMessage(message, 'user');
+  userInput.value = '';
+
+  // Bot Typing Indicator
+  addLoadingIndicator();
+
+  setTimeout(() => {
+    removeLoadingIndicator();
+    const response = botResponses[message.toLowerCase()] || botResponses['default'];
+    addMessage(response, 'bot');
+  }, 1000);
+}
+
+// Add Message to Chat
+function addMessage(text, type) {
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message', `${type}-message`);
+  messageDiv.textContent = text;
+  messagesDiv.appendChild(messageDiv);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Add Loading Indicator
+function addLoadingIndicator() {
+  const loadingDiv = document.createElement('div');
+  loadingDiv.classList.add('message', 'bot-message', 'loading');
+  loadingDiv.id = 'loading';
+  loadingDiv.innerHTML = `
+    <div class="loading-dot"></div>
+    <div class="loading-dot"></div>
+    <div class="loading-dot"></div>
+  `;
+  messagesDiv.appendChild(loadingDiv);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Remove Loading Indicator
+function removeLoadingIndicator() {
+  const loadingDiv = document.getElementById('loading');
+  if (loadingDiv) messagesDiv.removeChild(loadingDiv);
+}
