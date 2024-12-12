@@ -1,9 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple Chatbot</title>
+  <title>Enhanced Chatbot</title>
   <style>
-    /* ... CSS styles */
+    .chat-container {
+      width: 400px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .chat-history {
+      height: 300px;
+      overflow-y: scroll;
+    }
+
+    .user-message, .bot-message {
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .user-message {
+      background-color: #f2f2f2;
+    }
+
+    .bot-message {
+      background-color: #e0e0e0;
+    }
+
+    .typing-indicator {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: inline-block;
+      margin-right: 5px;
+      animation: typing 0.7s infinite;
+    }
+
+    @keyframes typing {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -15,19 +63,45 @@
     </div>
   </div>
   <script>
-    // Fetch the responses from the JSON file
-    fetch('responses.json')
-      .then(response => response.json())
-      .then(data => {
-        const responses = data;
+    const responses = {
+      "hello": "Hello! How can I help you today?",
+      "how are you": "I'm doing well, thank you. How are you?",
+      "what's the weather": "I can't tell you the weather, but you can check a weather website.",
+      // ... more responses
+    };
 
-        function sendMessage() {
-          const message = document.getElementById('user-message').value;
-          const chatHistory = document.querySelector('.chat-history');
+    function sendMessage() {
+      const message = document.getElementById('user-message').value;
+      const chatHistory = document.querySelector('.chat-history');
 
-          // ... rest of the sendMessage function, using the `responses` object
-        }
-      });
+      // Display user message
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('user-message');
+      userMessage.textContent = `You: ${message}`;
+      chatHistory.appendChild(userMessage);
+
+      // Display typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('typing-indicator');
+      chatHistory.appendChild(typingIndicator);
+
+      // Simulate processing time and display bot response
+      setTimeout(() => {
+        typingIndicator.remove();
+
+        const botMessage = document.createElement('div');
+        botMessage.classList.add('bot-message');
+
+        // Check if the user's message matches a key in the responses object
+        const response = responses[message.toLowerCase()] || "I didn't understand. Please try asking something else.";
+        botMessage.textContent = `Bot: ${response}`;
+
+        chatHistory.appendChild(botMessage);
+
+        // Clear the input field
+        document.getElementById('user-message').value = '';
+      }, 1000); // Adjust delay time as needed
+    }
   </script>
 </body>
 </html>
