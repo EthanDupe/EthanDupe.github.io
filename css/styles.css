@@ -17,7 +17,7 @@ body {
   position: relative;
   overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
   overflow-y: auto; /* Ensures vertical scrolling */
-  min-height: 100vh; /* Allows scrolling if content exceeds viewport height */
+  padding-bottom: 80px; /* Match this to the approximate height of the footer */
 }
 
 
@@ -128,13 +128,14 @@ header {
 /* Content box styles */
 .content-box {
   text-align: center;
+  flex: 1; /* Pushes the footer down */
+  margin-top: 150px; /* Keeps spacing under the header */
   z-index: 1;
   background: rgba(0, 0, 0, 0.8);
   padding: 30px;
   border-radius: 10px;
   border: 2px solid #00ff00;
   max-width: 800px;
-  margin-top: 150px;
 }
 
 .content-box h2 {
