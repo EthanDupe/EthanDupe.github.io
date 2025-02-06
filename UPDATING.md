@@ -61,12 +61,9 @@ Here’s an example of how your `version.json` should look:
 
 ## Troubleshooting
 
-- **No Version Update Notification**: If the notification doesn’t appear, double-check that the `version.json` file is correctly hosted and accessible from the raw URL.
+- **No Version Update Notification**: If the notification doesn’t appear, double-check that the `version.json` file is correctly hosted and accessible from the raw URL, or make sure the website is actually on the updated version.
 - **Incorrect Version Display**: Ensure that both the version in the HTML (`data-version="X.X"`) and the `version.json` file match correctly.
 
-## Conclusion
-
-Updating the version of your website is a simple process of modifying the `version.json` file and the HTML version attribute. Always test the version-checking functionality after making updates to ensure everything works smoothly.
 ```
 
 ---
