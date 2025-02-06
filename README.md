@@ -1,6 +1,6 @@
 # A70M Web
 
-A70M Web is a dynamic website featuring games, chat, and updates. It includes a **hacker-style matrix background**, a **fixed header and footer**, and interactive elements such as notifications and a Discord link. The site is currently in **Beta V2.2**, with ongoing testing and improvements.
+A70M Web is a dynamic website featuring games, chat, and updates. It includes a **hacker-style matrix background**, a **fixed header and footer**, and interactive elements such as notifications. The site is currently in **V1.0**, with ongoing testing and improvements.
 
 ## Table of Contents
 1. [Features](#features)
