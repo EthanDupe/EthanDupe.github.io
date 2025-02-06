@@ -9,7 +9,7 @@
 </head>
 <body>
   
-  <header data-version="1.2">  <!-- Replace this version when updating manually -->
+  <header data-version="1.3">  <!-- Replace this version when updating manually -->
 
 
 
@@ -23,7 +23,6 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="/jarbeefis/james/">Games</a></li>
           <li><a href="/pages/chat/">Chat</a></li>
         </ul>
       </nav>
@@ -42,13 +41,13 @@
 
 
 <!-- Version Checking -->
-<div   id="notification" style="display: none;">
+<div id="notification" style="display: none;">
   <span id="notification-message"></span>
+  <button onclick="dismissNotification()">Dismiss</button>
 </div>
-
-<script src="/js/version-check.js"></script>
 <!-- Version Checking -->
 
+<script src="/js/version-check.js"></script>  <!-- Your version checking script -->
 
 
 
