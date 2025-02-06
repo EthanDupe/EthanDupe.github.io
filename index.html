@@ -8,7 +8,12 @@
   <link rel="icon" href="/assets/Ethan.png" />
 </head>
 <body>
-  <header>
+  
+  <header data-version="1.2">  <!-- Replace this version when updating manually -->
+
+
+
+
     <div class="header-content">
       <div class="logo-container">
         <img src="/assets/Ethan1noloop.gif" alt="Logo" class="logo" />
@@ -21,11 +26,11 @@
           <li><a href="/jarbeefis/james/">Games</a></li>
           <li><a href="/pages/chat/">Chat</a></li>
         </ul>
-        <!-- Update Button in Header Nav -->
-        <button onclick="window.location.href='https://ethandupe.github.io/pages/update';" class="update-button">Update</button>
       </nav>
     </div>
   </header>
+
+ <div style="height: 200px;"></div>
 
   <canvas class="matrix-canvas"></canvas>
 
@@ -34,11 +39,20 @@
     <a href="https://discord.gg/r2pzbRv84N">Join the Discord</a>
   </div>
 
-  <!-- Notification now only includes a dismiss button -->
-  <div id="notification">
-    <span>BETA v2.1 Update</span>
-    <button onclick="dismissNotification()">Dismiss</button>
-  </div>
+
+
+<!-- Version Checking -->
+<div   id="notification" style="display: none;">
+  <span id="notification-message"></span>
+</div>
+
+<script src="/js/version-check.js"></script>
+<!-- Version Checking -->
+
+
+
+
+
 
   <script src="/js/index.js"></script>
 </body>
