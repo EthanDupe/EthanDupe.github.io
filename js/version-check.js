@@ -42,8 +42,8 @@
         upToDateMsg.textContent = "✅ Your version is up to date.";
         document.body.appendChild(upToDateMsg);
 
-        // Auto-hide message after 5 seconds
-        setTimeout(() => upToDateMsg.remove(), 5000);
+        // Auto-hide message after 50 seconds
+        setTimeout(() => upToDateMsg.remove(), 50000);
     }
 
     const versionData = await fetchVersion();
