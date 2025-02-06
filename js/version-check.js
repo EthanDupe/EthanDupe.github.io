@@ -1,5 +1,6 @@
 (async function () {
-    const VERSION_FILE = "https://github.com/EthanDupe/EthanDupe.github.io/version.json";
+    // GitHub raw URL for version.json
+    const VERSION_FILE = "https://raw.githubusercontent.com/EthanDupe/EthanDupe.github.io/main/version.json";
     const currentVersion = document.querySelector("header").getAttribute("data-version");
 
     async function fetchVersion() {
