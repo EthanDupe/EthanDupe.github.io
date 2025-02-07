@@ -25,7 +25,7 @@
 
         // Update notification content
         let changeList = changes.map(change => `• ${change}`).join("<br>");
-        notification.innerHTML = `<strong>New Update Available: v${version}</strong><br>${changeList}<br><button onclick="document.getElementById('notification').remove()">Dismiss</button>`;
+        notification.innerHTML = `<strong>Update Available: v${version}</strong><br>${changeList}<br><button onclick="document.getElementById('notification').remove()">Dismiss</button>`;
         
         notification.style.display = "block"; // Make it visible
     }
@@ -42,8 +42,8 @@
         upToDateMsg.textContent = "✅ Your version is up to date.";
         document.body.appendChild(upToDateMsg);
 
-        // Auto-hide message after 5 seconds
-        setTimeout(() => upToDateMsg.remove(), 5000);
+        // Auto-hide message after 50 seconds
+        setTimeout(() => upToDateMsg.remove(), 50000);
     }
 
     const versionData = await fetchVersion();
