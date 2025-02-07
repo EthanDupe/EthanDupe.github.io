@@ -46,3 +46,68 @@ window.onload = function() {
     window.addEventListener('resize', resizeCanvas);
     setInterval(drawMatrix, 33);
 }
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Applying user settings...");
+
+    // Load saved settings from localStorage
+    const savedTheme = localStorage.getItem("theme");
+    const savedBg = localStorage.getItem("background");
+    const savedFontSize = localStorage.getItem("fontSize");
+    const savedButtonColor = localStorage.getItem("buttonColor");
+    const savedHeaderColor = localStorage.getItem("headerColor");
+    const savedTextShadow = localStorage.getItem("textShadow") === "true";
+    const savedFontFamily = localStorage.getItem("fontFamily");
+
+    // Apply Theme
+    if (savedTheme) document.body.classList.add(savedTheme + "-theme");
+
+    // Apply Background Image
+    if (savedBg) {
+        document.body.style.backgroundImage = `url(${savedBg})`;
+        document.body.classList.add("custom-background");
+    }
+
+    // Apply Font Size
+    if (savedFontSize) {
+        document.body.style.fontSize = `${savedFontSize}px`;
+    }
+
+    // Apply Button Color
+    if (savedButtonColor) {
+        document.documentElement.style.setProperty("--button-color", savedButtonColor);
+    }
+
+    // Apply Header Color
+    if (savedHeaderColor) {
+        const header = document.querySelector("header");
+        if (header) header.style.backgroundColor = savedHeaderColor;
+    }
+
+    // Apply Text Shadow
+    if (savedTextShadow) {
+        document.body.classList.add("text-shadow-enabled");
+    }
+
+    // Apply Font Family
+    if (savedFontFamily) {
+        document.body.style.fontFamily = savedFontFamily;
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Applying saved theme...");
+  
+    // Load the saved theme from localStorage
+    const savedTheme = localStorage.getItem("theme");
+  
+    // If a theme is saved, apply it
+    if (savedTheme) {
+      document.body.classList.add(savedTheme);
+      const header = document.querySelector("header");
+      if (header) {
+        header.classList.add(savedTheme);  // Apply theme to header
+      }
+    }
+  });
+  

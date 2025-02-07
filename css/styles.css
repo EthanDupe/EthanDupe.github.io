@@ -149,23 +149,53 @@ button:hover {
   color: #f0f0f0;
 }
 
+.setting-group {
+  margin-bottom: 20px;
+}
+
+.setting-group label {
+  font-size: 1.2em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.setting-group input,
+.setting-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2em;
+  margin-top: 8px;
+  background-color: #333;
+  color: #f0f0f0;
+  border: 1px solid #00ff00;
+  border-radius: 5px;
+}
+
+.setting-group input[type="range"] {
+  width: 100%;
+}
+
+#font-size-value {
+  margin-top: 5px;
+}
+
 .links {
   margin-top: 20px;
 }
 
-.links .btn {
-  font-size: 1.5em;
+.links button {
+  font-size: 1.2em;
+  padding: 10px 20px;
   background-color: #00ff00;
   color: #121212;
-  padding: 15px 30px;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
+  cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
 
-.links .btn:hover {
-  background-color: #ffffff;
+.links button:hover {
+  background-color: #121212;
   color: #00ff00;
 }
 
@@ -276,4 +306,39 @@ a:hover {
   .footer-links {
     margin-top: 10px;
   }
+}
+
+/* Light Theme */
+.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+/* Hacker Theme */
+.hacker-theme {
+  background-color: black;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Background Image */
+body.custom-background {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Custom Font */
+.custom-font {
+  font-family: var(--custom-font, Arial);
+}
+
+/* Text Shadow */
+.text-shadow-enabled {
+  text-shadow: 2px 2px 4px rgba(0, 255, 0, 0.7);
 }
