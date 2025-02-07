@@ -25,7 +25,7 @@
 
         // Update notification content
         let changeList = changes.map(change => `• ${change}`).join("<br>");
-        notification.innerHTML = `<strong>New Update Available: v${version}</strong><br>${changeList}<br><button onclick="document.getElementById('notification').remove()">Dismiss</button>`;
+        notification.innerHTML = `<strong>Update Available: v${version}</strong><br>${changeList}<br><button onclick="document.getElementById('notification').remove()">Dismiss</button>`;
         
         notification.style.display = "block"; // Make it visible
     }
