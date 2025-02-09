@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GitHub Releases List</title>
+  <title>GitHub Releases for EthanDupe.github.io (Dark Mode)</title>
   <style>
+    /* Dark mode styling */
     body {
       font-family: Arial, sans-serif;
-      background: #fafafa;
+      background: #121212;
       margin: 0;
       padding: 0;
-      color: #333;
+      color: #e0e0e0;
     }
     .container {
       max-width: 800px;
       margin: 2rem auto;
       padding: 1rem;
-      background: #fff;
-      border: 1px solid #ddd;
+      background: #1e1e1e;
+      border: 1px solid #333;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
     h1 {
       text-align: center;
       margin-bottom: 1.5rem;
+      color: #fff;
     }
     .release {
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #333;
       padding: 1rem 0;
     }
     .release:last-child {
@@ -35,20 +37,20 @@
     .release h2 {
       margin: 0;
       font-size: 1.2rem;
-      color: #444;
+      color: #cfcfcf;
     }
     .release p {
       margin: 0.5rem 0;
     }
     .release a {
-      color: #0366d6;
+      color: #81a1c1;
       text-decoration: none;
     }
     .release a:hover {
       text-decoration: underline;
     }
     .notes {
-      background: #f9f9f9;
+      background: #2a2a2a;
       padding: 0.5rem;
       border-radius: 4px;
       font-size: 0.95rem;
@@ -84,7 +86,7 @@
       // Return formatted HTML for the release entry
       return `
         <div class="release">
-          <h2>${release.tag_name} ${authorHTML}</h2>
+          <h2>${release.tag_name}${authorHTML}</h2>
           <p><strong>Name:</strong> ${release.name || 'N/A'}</p>
           <p><strong>Published at:</strong> ${publishedDate}</p>
           ${release.body ? `<div class="notes"><strong>Release Notes:</strong><br>${release.body}</div>` : ''}
