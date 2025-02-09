@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Releases List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .release {
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+    .release:last-child {
+      border-bottom: none;
+    }
+    .release h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #444;
+    }
+    .release p {
+      margin: 0.5rem 0;
+    }
+    .release a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    .release a:hover {
+      text-decoration: underline;
+    }
+    .notes {
+      background: #f9f9f9;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GitHub Releases for EthanDupe.github.io</h1>
+    <div id="releases">
+      <p>Loading releases...</p>
+    </div>
+  </div>
+
+  <script>
+    // GitHub API URL for the repository's releases
+    const releasesApiUrl = 'https://api.github.com/repos/EthanDupe/EthanDupe.github.io/releases';
+
+    // Function to create HTML for a single release entry
+    function createReleaseHTML(release) {
+      // Format published date (if available)
+      const publishedDate = release.published_at 
+        ? new Date(release.published_at).toLocaleString() 
+        : 'N/A';
+
+      // If release author exists, use their GitHub profile URL and username
+      let authorHTML = '';
+      if (release.author && release.author.login) {
+        authorHTML = ` by <a href="${release.author.html_url}" target="_blank">${release.author.login}</a>`;
+      }
+
+      // Return formatted HTML for the release entry
+      return `
+        <div class="release">
+          <h2>${release.tag_name} ${authorHTML}</h2>
+          <p><strong>Name:</strong> ${release.name || 'N/A'}</p>
+          <p><strong>Published at:</strong> ${publishedDate}</p>
+          ${release.body ? `<div class="notes"><strong>Release Notes:</strong><br>${release.body}</div>` : ''}
+          <p><a href="${release.html_url}" target="_blank">View on GitHub</a></p>
+        </div>
+      `;
+    }
+
+    // Fetch the releases data from GitHub
+    fetch(releasesApiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(releases => {
+        const releasesContainer = document.getElementById('releases');
+        
+        // If no releases are found, display a message
+        if (!releases.length) {
+          releasesContainer.innerHTML = '<p>No releases found.</p>';
+          return;
+        }
+        
+        // Build the HTML by iterating through all releases.
+        // GitHub API returns releases in descending order (newest first) by default.
+        let html = '';
+        releases.forEach(release => {
+          html += createReleaseHTML(release);
+        });
+        releasesContainer.innerHTML = html;
+      })
+      .catch(error => {
+        document.getElementById('releases').innerHTML = `<p>Error fetching releases: ${error.message}</p>`;
+        console.error('Error fetching releases:', error);
+      });
+  </script>
+</body>
+</html>
