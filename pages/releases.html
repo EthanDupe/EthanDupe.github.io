@@ -10,14 +10,12 @@
   <meta name="keywords" content="unblocked games, EthanDupe, free online games, play games at school, A70M Web, HTML5 games, browser games">
   <meta name="author" content="A70M Web">
   
-  <!-- Open Graph (for social media previews) -->
   <meta property="og:title" content="Play Unblocked Gam3$ - A70M Web">
   <meta property="og:description" content="A70M Web offers a collection of unblocked gam3$, free to play anytime.">
   <meta property="og:image" content="/assets/Ethan.png">
   <meta property="og:url" content="https://ethandupe.github.io">
   <meta property="og:type" content="website">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Play Unblocked gam3$ - A70M Web">
   <meta name="twitter:description" content="Enjoy free unblocked gam3$ online without restrictions.">
@@ -29,7 +27,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.12/marked.min.js"></script>
   
   <style>
-    /* Matrix effect canvas */
     canvas {
       position: fixed;
       top: 0;
@@ -40,7 +37,6 @@
       background-color: black;
     }
     
-    /* Styling for Markdown content */
     .markdown-content {
       background-color: #1e1e1e;
       color: #c9d1d9;
@@ -50,20 +46,16 @@
       max-width: 800px;
       margin: 20px auto;
     }
-
     .markdown-content h1, .markdown-content h2, .markdown-content h3 {
       color: #58a6ff;
     }
-
     .markdown-content a {
       color: #58a6ff;
       text-decoration: none;
     }
-
     .markdown-content a:hover {
       text-decoration: underline;
     }
-
     .markdown-content pre {
       background-color: #0d1117;
       padding: 10px;
@@ -84,6 +76,7 @@
       </div>
       <nav class="header-nav">
         <ul>
+          <li><a href="/">Home</a></li>
           <li><a href="/pages/chat/">Chat</a></li>
           <li><a href="/jarbeefis/james/">Games</a></li>
           <li><a href="https://discord.gg/r2pzbRv84N">Discord</a></li>
@@ -135,22 +128,23 @@
 
   <div style="height: 200px;"></div>
 
-  
   <div class="markdown-content" id="release-notes"></div>
   
   <script>
-    fetch('https://api.github.com/repos/EthanDupe/EthanDupe.github.io/releases')
-      .then(response => response.json())
-      .then(releases => {
-        if (releases.length > 0) {
-          document.getElementById('release-notes').innerHTML = marked.parse(releases[0].body);
-        } else {
-          document.getElementById('release-notes').innerHTML = '<p>No releases found.</p>';
-        }
-      })
-      .catch(error => {
-        document.getElementById('release-notes').innerHTML = `<p>Error fetching releases: ${error.message}</p>`;
-      });
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('https://api.github.com/repos/EthanDupe/EthanDupe.github.io/releases')
+        .then(response => response.json())
+        .then(releases => {
+          if (releases.length > 0) {
+            document.getElementById('release-notes').innerHTML = marked.parse(releases[0].body);
+          } else {
+            document.getElementById('release-notes').innerHTML = '<p>No releases found.</p>';
+          }
+        })
+        .catch(error => {
+          document.getElementById('release-notes').innerHTML = `<p>Error fetching releases: ${error.message}</p>`;
+        });
+    });
   </script>
 
   <script src="/js/index.js"></script>
