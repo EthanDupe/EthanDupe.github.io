@@ -130,6 +130,7 @@
 </head>
 <body>
 
+  <!-- Maintenance Banner -->
   <div id="maintenance-banner" role="alert" aria-live="assertive" aria-atomic="true">
     <p>⚠️ Website is currently under maintenance. Some features may be unavailable.</p>
     <button aria-label="Close maintenance notification" id="closeBannerBtn">&times;</button>
@@ -194,7 +195,7 @@
     window.addEventListener("resize", resizeCanvas);
     setInterval(drawMatrix, 33);
 
-    // Maintenance banner close button logic
+    // Banner close button handler
     const banner = document.getElementById('maintenance-banner');
     const closeBtn = document.getElementById('closeBannerBtn');
 
