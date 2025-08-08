@@ -27,15 +27,15 @@
   <link rel="icon" href="/assets/Ethan.png" />
   
   <style>
-    /* Matrix effect canvas */
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: -1;
-      background-color: black;
+    /* Reset & base */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: black;
+      color: #eee;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease;
     }
 
     /* Maintenance banner */
@@ -58,6 +58,7 @@
       align-items: center;
       gap: 1rem;
       animation: slideDownBanner 0.5s ease forwards;
+      user-select: none;
     }
 
     #maintenance-banner p {
@@ -69,7 +70,7 @@
       background: transparent;
       border: none;
       color: #e6ffe6;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       cursor: pointer;
       padding: 0;
       line-height: 1;
@@ -94,14 +95,217 @@
       }
     }
 
-    /* Push header down so it doesn't get overlapped */
+    /* Push body content so banner doesn't overlap */
     body {
-      padding-top: 38px; /* approx banner height */
+      padding-top: 38px; /* adjust if banner height changes */
+    }
+
+    /* Header */
+    header[data-version="1.4"] {
+      position: sticky;
+      top: 38px; /* below banner */
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      z-index: 1400;
+      padding: 0.7rem 2rem;
+      display: flex;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-container {
+      flex-shrink: 0;
+    }
+
+    .logo {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 3px #0f0);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .header-title h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #76ff03;
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 8px #76ff03aa;
+      user-select: none;
+      font-weight: 900;
+    }
+
+    .header-title p {
+      margin: 0;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #b9f6ca;
+      user-select: none;
+    }
+
+    .header-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    .header-nav ul li a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #b9f6ca;
+      position: relative;
+      padding: 0.3rem 0;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+
+    .header-nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background: #76ff03;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .header-nav ul li a:hover,
+    .header-nav ul li a:focus {
+      color: #76ff03;
+      outline: none;
+    }
+
+    .header-nav ul li a:hover::after,
+    .header-nav ul li a:focus::after {
+      width: 100%;
+    }
+
+    /* Matrix canvas */
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+      background-color: black;
+    }
+
+    /* Content boxes */
+    .content-box {
+      max-width: 900px;
+      margin: 3rem auto;
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #76ff03;
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 0 15px #76ff03aa;
+      color: #d0f0a9;
+      font-weight: 600;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+      animation-delay: 0.5s;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .content-box:nth-of-type(2) {
+      animation-delay: 0.7s;
+    }
+
+    .content-box:hover {
+      box-shadow: 0 0 25px #aef27ccc;
+      transform: translateY(0);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .content-box h2 {
+      margin-top: 0;
+      color: #b9f6ca;
+      letter-spacing: 0.05em;
+      font-weight: 900;
+    }
+
+    .content-box p {
+      margin: 0.8rem 0 1.2rem;
+      color: #c5f6b1;
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
+
+    .content-box a {
+      color: #76ff03;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom-color 0.3s ease;
+    }
+
+    .content-box a:hover,
+    .content-box a:focus {
+      border-bottom-color: #b9f6ca;
+      outline: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .header-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      body {
+        padding-top: 45px;
+      }
+      header[data-version="1.4"] {
+        top: 45px;
+      }
     }
 
     @media (max-width: 480px) {
       body {
-        padding-top: 50px;
+        padding-top: 55px;
+      }
+      header[data-version="1.4"] {
+        top: 55px;
+        padding: 1rem 1.2rem;
+      }
+      .header-title h1 {
+        font-size: 1.4rem;
+      }
+      .header-nav ul li a {
+        font-size: 0.9rem;
       }
       #maintenance-banner {
         font-size: 0.9rem;
@@ -130,7 +334,7 @@
 </head>
 <body>
 
-  <!-- Maintenance Banner -->
+  <!-- Maintenance banner -->
   <div id="maintenance-banner" role="alert" aria-live="assertive" aria-atomic="true">
     <p>⚠️ Website is currently under maintenance. Some features may be unavailable.</p>
     <button aria-label="Close maintenance notification" id="closeBannerBtn">&times;</button>
@@ -145,11 +349,11 @@
         <h1>A70M Web</h1>
         <p>EthanDupe Team</p>
       </div>
-      <nav class="header-nav">
+      <nav class="header-nav" role="navigation" aria-label="Primary navigation">
         <ul>
           <li><a href="/pages/chat/">Chat</a></li>
           <li><a href="/jarbeefis/james/">Games</a></li>
-          <li><a href="https://discord.gg/r2pzbRv84N">Discord</a></li>
+          <li><a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer">Discord</a></li>
           <li><a href="/pages/releases.html">Update Log</a></li>
           <li><a href="/pages/settings.html">Settings</a></li>
         </ul>
@@ -195,7 +399,7 @@
     window.addEventListener("resize", resizeCanvas);
     setInterval(drawMatrix, 33);
 
-    // Banner close button handler
+    // Maintenance banner close button
     const banner = document.getElementById('maintenance-banner');
     const closeBtn = document.getElementById('closeBannerBtn');
 
@@ -207,19 +411,21 @@
       setTimeout(() => {
         banner.remove();
         document.body.style.paddingTop = '0';
+        // Adjust header top after banner removed
+        document.querySelector('header[data-version="1.4"]').style.top = '0';
       }, 400);
     });
   </script>
 
   <div style="height: 200px;"></div>
 
-  <div class="content-box">
+  <div class="content-box" tabindex="0" aria-label="Play Free Unblocked Games and more on A70M Web">
     <h2>Play Free Unblocked Games and more on A70M Web</h2>
     <p>It's still in BETA though, so be patient...</p>
-    <a href="https://discord.gg/r2pzbRv84N">Join the Discord</a>
+    <a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer">Join the Discord</a>
   </div>
 
-  <div class="content-box">
+  <div class="content-box" tabindex="0" aria-label="Check the Update Log">
     <h2>Check the Update Log!</h2>
     <a href="/pages/releases.html">Update Log</a>
   </div>
