@@ -50,6 +50,15 @@
             transform: translate(3px, 3px);
             box-shadow: 3px 3px 0px var(--border-color);
         }
+        
+        .retro-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            cursor: pointer;
+            text-shadow: 1px 1px 0px var(--secondary-bg);
+            background-color: #ffc0cb;
+            color: #333;
+        }
 
         /* --- Boot Screen --- */
         .boot-screen {
@@ -209,7 +218,7 @@
         </header>
 
         <!-- Main Heading -->
-        <section class="text-center mb-16">
+        <section class="text-center mb-8">
             <h2 class="text-5xl md:text-7xl font-bold mb-4 leading-tight text-black">
                 UNBLOCKED <span class="text-blue-500">GAMES</span>
             </h2>
@@ -218,49 +227,17 @@
             </p>
         </section>
 
-        <!-- Game Cards Section -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <!-- Game Card 1 -->
-            <div class="game-card">
-                <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://placehold.co/64x64/ffc0cb/000?text=G1" alt="Game Icon" class="w-16 h-16 border-4 border-black" />
-                    <div>
-                        <h3 class="card-title text-2xl font-bold">Retro Run</h3>
-                        <p class="text-sm text-gray-700">Jump, dodge, survive.</p>
-                    </div>
-                </div>
-                <p>A classic endless runner with a retro twist. Fast-paced action and fun sound effects.</p>
-                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now</a>
-            </div>
+        <!-- New button container for Play and Tools -->
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
+            <button class="retro-box retro-button">
+                <i class="fa-solid fa-gamepad"></i> Play
+            </button>
+            <button class="retro-box retro-button">
+                <i class="fa-solid fa-toolbox"></i> Tools
+            </button>
+        </div>
 
-            <!-- Game Card 2 -->
-            <div class="game-card">
-                <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://placehold.co/64x64/ffc0cb/000?text=G2" alt="Game Icon" class="w-16 h-16 border-4 border-black" />
-                    <div>
-                        <h3 class="card-title text-2xl font-bold">Pixel Quest</h3>
-                        <p class="text-sm text-gray-700">An epic 8-bit adventure.</p>
-                    </div>
-                </div>
-                <p>Explore a procedurally generated world, defeat bosses, and collect rare loot in this RPG.</p>
-                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now</a>
-            </div>
-
-            <!-- Game Card 3 -->
-            <div class="game-card">
-                <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://placehold.co/64x64/ffc0cb/000?text=G3" alt="Game Icon" class="w-16 h-16 border-4 border-black" />
-                    <div>
-                        <h3 class="card-title text-2xl font-bold">Data Drive</h3>
-                        <p class="text-sm text-gray-700">Race through the network.</p>
-                    </div>
-                </div>
-                <p>A high-speed racing game set inside a digital network. Avoid firewalls and hack the system.</p>
-                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now</a>
-            </div>
-        </section>
-
-        <!-- Your original content boxes, now with animations -->
+        <!-- Your original content boxes -->
         <div class="retro-box max-w-3xl mx-auto my-16 p-8" tabindex="0">
             <h2 class="text-3xl font-bold mb-4 text-black">About A70M Web</h2>
             <p>It's still in BETA though, so be patient...</p>
