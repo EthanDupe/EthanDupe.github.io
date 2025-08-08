@@ -1,53 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>A70M Web</title>
-  
-  <meta name="description" content="A70M Web offers a collection of unblocked gam3$, free to play anytime. Enjoy without restrictions.">
-  <meta name="keywords" content="unblocked games, EthanDupe, free online games, play games at school, A70M Web, HTML5 games, browser games">
-  <meta name="author" content="A70M Web">
-  
-  <!-- Open Graph (for social media previews) -->
-  <meta property="og:title" content="Play Unblocked Gam3$ - A70M Web">
-  <meta property="og:description" content="A70M Web offers a collection of unblocked gam3$, free to play anytime.">
-  <meta property="og:image" content="/assets/Ethan.png">
-  <meta property="og:url" content="https://ethandupe.github.io">
-  <meta property="og:type" content="website">
+  <title>A70M Web | Play Free Unblocked Games Anytime</title>
+  <meta name="description" content="Play free unblocked games on A70M Web — no restrictions, no downloads. Updated regularly for non-stop fun." />
+  <meta name="keywords" content="unblocked games, free browser games, HTML5 games, school games, EthanDupe, A70M Web" />
+  <meta name="author" content="A70M Web" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="A70M Web | Play Free Unblocked Games Anytime" />
+  <meta property="og:description" content="Play free unblocked games on A70M Web — no restrictions, no downloads." />
+  <meta property="og:image" content="https://ethandupe.github.io/assets/Ethan.png" />
+  <meta property="og:url" content="https://ethandupe.github.io" />
+  <meta property="og:type" content="website" />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Play Unblocked gam3$ - A70M Web">
-  <meta name="twitter:description" content="Enjoy free unblocked gam3$ online without restrictions.">
-  <meta name="twitter:image" content="/assets/Ethan.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="A70M Web | Play Free Unblocked Games Anytime" />
+  <meta name="twitter:description" content="Free, fun, and unblocked — A70M Web brings you HTML5 games without restrictions." />
+  <meta name="twitter:image" content="https://ethandupe.github.io/assets/Ethan.png" />
 
+  <!-- Styles -->
   <link rel="stylesheet" href="/css/styles.css" />
-  <link rel="icon" href="/assets/Ethan.png" />
-  
+  <link rel="icon" href="/assets/Ethan.png" type="image/png" />
+
   <style>
-    /* Matrix effect canvas */
+    /* Full-screen matrix canvas background */
     canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100vh;
+      background: black;
       z-index: -1;
-      background-color: black;
+    }
+
+    /* Accessibility-friendly skip link */
+    .skip-to-content {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-to-content:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0.5em;
+      background: #0f0;
+      color: black;
+      z-index: 999;
     }
   </style>
 
-  <!-- Structured Data (For better search ranking) -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Game",
     "name": "Unblocked Games - A70M Web",
-    "description": "A70M Web offers a collection of unblocked gam3$, free to play anytime.",
+    "description": "Play free unblocked games on A70M Web — no restrictions, no downloads.",
     "url": "https://ethandupe.github.io",
-    "image": "https://EthanDupe.github.io/assets/Ethan.png",
+    "image": "https://ethandupe.github.io/assets/Ethan.png",
     "publisher": {
       "@type": "Organization",
       "name": "A70M Web",
@@ -55,24 +74,25 @@
     }
   }
   </script>
-
 </head>
 <body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-  <header data-version="1.4">
+  <!-- Header -->
+  <header data-version="1.5" aria-label="Main navigation">
     <div class="header-content">
       <div class="logo-container">
-        <img src="/assets/Ethan1noloop.gif" alt="Logo" class="logo" />
+        <img src="/assets/Ethan1noloop.gif" alt="A70M Web Logo" class="logo" />
       </div>
       <div class="header-title">
         <h1>A70M Web</h1>
-        <p>EthanDupe Team</p>
+        <p>By EthanDupe Team</p>
       </div>
-      <nav class="header-nav">
+      <nav class="header-nav" aria-label="Site navigation">
         <ul>
           <li><a href="/pages/chat/">Chat</a></li>
           <li><a href="/jarbeefis/james/">Games</a></li>
-          <li><a href="https://discord.gg/r2pzbRv84N">Discord</a></li>
+          <li><a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer">Discord</a></li>
           <li><a href="/pages/releases.html">Update Log</a></li>
           <li><a href="/pages/settings.html">Settings</a></li>
         </ul>
@@ -80,9 +100,26 @@
     </div>
   </header>
 
-  <canvas id="matrixCanvas"></canvas>
+  <!-- Matrix Effect -->
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
 
-  <script>
+  <!-- Main Content -->
+  <main id="main-content">
+    <section class="content-box">
+      <h2>Play Free Unblocked Games</h2>
+      <p>Enjoy hundreds of free, browser-based games anytime — no restrictions, no downloads. A70M Web is still in <strong>BETA</strong>, so expect frequent updates and new content.</p>
+      <p><a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer">Join the Discord</a> to give feedback and get updates.</p>
+    </section>
+
+    <section class="content-box">
+      <h2>Check the Update Log</h2>
+      <p>We’re constantly improving A70M Web with new games and features.</p>
+      <p><a href="/pages/releases.html">View Update Log</a></p>
+    </section>
+  </main>
+
+  <!-- Matrix Script -->
+  <script defer>
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -101,17 +138,17 @@
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#0F0";
-      ctx.font = fontSize + "px monospace";
+      ctx.font = `${fontSize}px monospace`;
 
-      for (let i = 0; i < drops.length; i++) {
+      drops.forEach((y, i) => {
         const text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        ctx.fillText(text, i * fontSize, y * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
-        drops[i]++;
-      }
+        drops[i] = y + 1;
+      });
     }
 
     resizeCanvas();
@@ -119,20 +156,6 @@
     setInterval(drawMatrix, 33);
   </script>
 
-  <div style="height: 200px;"></div>
-
-  <div class="content-box">
-    <h2>Play Free Unblocked Games and more on A70M Web</h2>
-    <p>It's still in BETA though, so be patient...</p>
-    <a href="https://discord.gg/r2pzbRv84N">Join the Discord</a>
-  </div>
-
-  <div class="content-box">
-    <h2>Check the Update Log!</h2>
-    <a href="/pages/releases.html">Update Log</a>
-  </div>
-
-
-  <script src="/js/index.js"></script>
+  <script src="/js/index.js" defer></script>
 </body>
 </html>
