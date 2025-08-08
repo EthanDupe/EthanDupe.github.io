@@ -3,86 +3,52 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A70M Web - Hacker Hub</title>
+    <title>A70M Web - Game Portal</title>
     <!-- Use Tailwind CSS for a solid responsive base -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts for the hacker vibe -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- GSAP for animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Vanilla-Tilt.js for 3D hover effects -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <!-- Google Fonts for a modern, clean feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-    <!--
-        Note: The original links to local files (`/css/styles.css`, `/assets/Ethan.png`) have been
-        removed or replaced with placeholders to make this a self-contained file.
-    -->
     <style>
+        /* CSS variables for consistent theming */
         :root {
-            --primary-neon: #33ffcc; /* Cyan */
-            --secondary-neon: #ff66e5; /* Magenta */
-            --tertiary-neon: #66ccff; /* Blue */
-            --bg-color: #0d0d1a;
-            --text-color: #e0e0e0;
+            --primary-bg: #87cefa;    /* Sky Blue */
+            --secondary-bg: #fff;     /* White */
+            --tertiary-bg: #ffc0cb;   /* Pink */
+            --border-color: #333;
+            --text-color: #000;
         }
 
         /* --- Global Styles & Effects --- */
         body, html {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
+            background-color: var(--primary-bg);
             color: var(--text-color);
-            font-family: 'Roboto Mono', monospace;
+            /* Modern font for the entire website */
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        .neon-text {
-            color: var(--primary-neon);
-            text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon), 0 0 15px var(--primary-neon);
+        /* A more modern font for headers to add a Y2K vibe */
+        h1, h2, h3, a, button { font-family: 'Inter', sans-serif; }
+        
+        /* Boxy, retro button and container styles */
+        .retro-box {
+            background-color: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--border-color);
+            padding: 1.5rem;
+            transition: all 0.2s ease-in-out;
+            transform: translate(0, 0);
         }
-
-        .neon-border {
-            border: 2px solid var(--primary-neon);
-            box-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .neon-border:hover {
-            box-shadow: 0 0 15px var(--primary-neon), 0 0 25px var(--primary-neon), 0 0 40px rgba(51, 255, 204, 0.7);
-        }
-
-        .gradient-bg {
-            background: radial-gradient(circle at 10% 20%, rgba(51, 255, 204, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 90% 80%, rgba(255, 102, 229, 0.1) 0%, transparent 50%),
-                        var(--bg-color);
-            background-size: 200% 200%;
-            animation: gradient-animation 15s ease infinite;
-        }
-
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- Scroll-triggered animation effects (GSAP classes) --- */
-        .reveal-up { opacity: 0; transform: translateY(50px); }
-        .reveal-fade { opacity: 0; }
-        .reveal-scale { opacity: 0; transform: scale(0.9); }
-
-        /* --- Canvas Backgrounds --- */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            opacity: 0.2;
-            transition: opacity 1s ease-in-out;
+        
+        .retro-box:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0px var(--border-color);
         }
 
         /* --- Boot Screen --- */
@@ -92,133 +58,162 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--bg-color);
+            background-color: #000;
+            color: #00ff00;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 100;
             transition: opacity 1s ease-out;
-            cursor: pointer;
+            cursor: wait;
         }
         .terminal-text {
             white-space: pre;
             overflow: hidden;
-            font-size: 1rem;
+            font-size: 1.5rem;
             max-width: 90%;
             text-align: left;
             margin: 0 auto;
-            border-right: 2px solid rgba(255, 255, 255, 0.75);
+            border-right: 2px solid rgba(0, 255, 0, 0.75);
             animation: blink-cursor 0.75s step-end infinite;
+            font-family: 'VT323', monospace; /* Keep terminal font retro */
         }
         @keyframes blink-cursor {
             from, to { border-color: transparent; }
-            50% { border-color: var(--primary-neon); }
+            50% { border-color: #00ff00; }
         }
 
-        /* --- Maintenance Banner --- */
-        #maintenance-banner {
+        /* --- Custom Background --- */
+        #bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: #2e7d32;
-            color: #e6ffe6;
-            text-align: center;
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-            z-index: 1500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 2px 10px rgba(46, 125, 50, 0.7);
+            height: 100%;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e80c4' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zm1 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
         }
 
+        /* --- Main Content Layout --- */
         .header-content {
             max-width: 1200px;
             width: 100%;
         }
 
-        /* --- Game Cards --- */
+        /* Game Card Styles */
         .game-card {
-            background: rgba(0, 0, 0, 0.75);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 0 15px var(--primary-neon);
-            color: #d0f0a9;
-            transition: all 0.3s ease;
-            position: relative;
-            transform-style: preserve-3d;
+            background-color: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--border-color);
+            padding: 1rem;
+            transition: all 0.2s ease-in-out;
         }
         .game-card:hover {
-            box-shadow: 0 0 25px var(--primary-neon), 0 0 40px rgba(51, 255, 204, 0.5);
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0px var(--border-color);
         }
+
         .game-card .card-title {
-            color: var(--primary-neon);
-            text-shadow: 0 0 5px var(--primary-neon);
+            color: var(--tertiary-bg);
+            text-shadow: 1px 1px 0px var(--border-color);
         }
+
         .game-card .card-link {
-            color: var(--secondary-neon);
+            text-decoration: none;
+            color: #0066cc;
+            text-shadow: 1px 1px 0px var(--secondary-bg);
+            transition: color 0.2s ease;
         }
         .game-card .card-link:hover {
-            color: var(--tertiary-neon);
+            color: #00aaff;
+            text-decoration: underline;
+        }
+        
+        /* Hide all main content initially */
+        #main-content {
+            opacity: 0;
+            display: none;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* --- Updated Title Font Sizes --- */
+        h1 { font-size: 1.5rem; }
+        h2 { font-size: 1.25rem; }
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+        }
+        .game-card .card-title { font-size: 1.25rem; } /* Adjusted h3 size */
+
+        /* Version Banner */
+        #version-banner {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--tertiary-bg);
+        }
+
+        /* --- Accessibility: Reduce motion --- */
+        @media (prefers-reduced-motion: reduce) {
+            .retro-box:hover {
+                transform: none;
+                box-shadow: 6px 6px 0px var(--border-color);
+            }
         }
     </style>
 </head>
-<body class="gradient-bg">
+<body class="bg-blue-300">
 
     <!-- Boot Screen -->
     <div id="boot-screen" class="boot-screen">
-        <pre id="terminal-output" class="terminal-text neon-text"></pre>
+        <pre id="terminal-output" class="terminal-text"></pre>
     </div>
 
     <!-- Main Content -->
-    <div id="main-content" class="min-h-screen py-10 px-4 md:px-10 opacity-0 hidden">
-        <!-- Background Canvas -->
-        <canvas id="bg-canvas"></canvas>
+    <div id="main-content" class="min-h-screen py-10 px-4 md:px-10">
+        <!-- Background Pattern -->
+        <div id="bg-pattern"></div>
 
-        <!-- Maintenance banner -->
-        <div id="maintenance-banner" role="alert" aria-live="assertive" aria-atomic="true" class="hidden">
-            <p>⚠️ Website is currently under maintenance. Some features may be unavailable.</p>
-            <button aria-label="Close maintenance notification" id="closeBannerBtn">&times;</button>
+        <!-- New Version Banner -->
+        <div id="version-banner">
+            <p class="text-sm font-bold">A70M Web v2.0BETA - Regularly Updated</p>
         </div>
 
         <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-center py-4 mb-10 reveal-fade">
+        <header class="flex flex-col md:flex-row justify-between items-center py-4 mb-10">
             <div class="header-content flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                    <a href="#" class="flex items-center space-x-2 no-underline text-white">
-                        <!-- Replaced GIF with placeholder -->
-                        <img src="https://placehold.co/48x48/0f0/fff?text=A70M" alt="Logo" class="w-12 h-12 rounded-lg" />
+                    <a href="#" class="flex items-center space-x-2 no-underline text-black">
+                        <!-- Placeholder for a retro logo -->
+                        <img src="https://placehold.co/48x48/ffc0cb/000?text=A70M" alt="Retro Logo" class="w-12 h-12 border-4 border-black" />
                         <div>
-                            <h1 class="text-3xl font-bold neon-text">A70M Web</h1>
-                            <p class="text-xs text-gray-400">EthanDupe Team</p>
+                            <h1 class="text-3xl font-bold text-black">A70M Web</h1>
+                            <p class="text-xs text-gray-700">EthanDupe Team</p>
                         </div>
                     </a>
-                    <span id="hacker-rank" class="text-sm border rounded-full px-3 py-1 cursor-pointer neon-border hover:neon-text transition-all duration-300">Rank: Rookie</span>
+                    <span id="hacker-rank" class="text-sm border-4 border-black px-3 py-1 cursor-pointer bg-yellow-300">Rank: Newbie</span>
                 </div>
                 <nav>
                     <ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 text-lg">
-                        <li><a href="#" class="hover:neon-text transition-colors duration-300">Games</a></li>
-                        <li><a href="#" class="hover:neon-text transition-colors duration-300">Tools</a></li>
-                        <li><a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer" class="hover:neon-text transition-colors duration-300">Discord</a></li>
-                        <li>
-                            <button id="bg-toggle" class="hover:neon-text transition-colors duration-300">
-                                <i class="fas fa-magic"></i> Background
-                            </button>
-                        </li>
+                        <li><a href="#" class="hover:underline transition-colors duration-200">Games</a></li>
+                        <li><a href="#" class="hover:underline transition-colors duration-200">Tools</a></li>
+                        <li><a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer" class="hover:underline transition-colors duration-200">Discord</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
         <!-- Main Heading -->
-        <section class="text-center mb-16 reveal-up">
-            <h2 class="text-5xl md:text-7xl font-bold mb-4 leading-tight neon-text">
-                <span class="neon-text">UNBLOCKED</span> GAMES 🎮
+        <section class="text-center mb-16">
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 leading-tight text-black">
+                UNBLOCKED <span class="text-blue-500">GAMES</span>
             </h2>
-            <p class="text-xl md:text-2xl text-gray-400">
+            <p class="text-xl md:text-2xl text-gray-700">
                 Enter the terminal. Play your way.
             </p>
         </section>
@@ -226,59 +221,59 @@
         <!-- Game Cards Section -->
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <!-- Game Card 1 -->
-            <div class="game-card reveal-scale" data-tilt>
+            <div class="game-card">
                 <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://placehold.co/64x64/33ffcc/0d0d1a?text=G1" alt="Game Icon" class="w-16 h-16 rounded-md neon-border" />
+                    <img src="https://placehold.co/64x64/ffc0cb/000?text=G1" alt="Game Icon" class="w-16 h-16 border-4 border-black" />
                     <div>
                         <h3 class="card-title text-2xl font-bold">Retro Run</h3>
-                        <p class="text-sm text-gray-400">Jump, dodge, survive.</p>
+                        <p class="text-sm text-gray-700">Jump, dodge, survive.</p>
                     </div>
                 </div>
-                <p>A classic endless runner with a neon cyberpunk twist. Fast-paced action and synthwave music.</p>
-                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now →</a>
+                <p>A classic endless runner with a retro twist. Fast-paced action and fun sound effects.</p>
+                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now</a>
             </div>
 
             <!-- Game Card 2 -->
-            <div class="game-card reveal-scale" data-tilt>
+            <div class="game-card">
                 <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://placehold.co/64x64/ff66e5/0d0d1a?text=G2" alt="Game Icon" class="w-16 h-16 rounded-md neon-border" />
+                    <img src="https://placehold.co/64x64/ffc0cb/000?text=G2" alt="Game Icon" class="w-16 h-16 border-4 border-black" />
                     <div>
                         <h3 class="card-title text-2xl font-bold">Pixel Quest</h3>
-                        <p class="text-sm text-gray-400">An epic 8-bit adventure.</p>
+                        <p class="text-sm text-gray-700">An epic 8-bit adventure.</p>
                     </div>
                 </div>
                 <p>Explore a procedurally generated world, defeat bosses, and collect rare loot in this RPG.</p>
-                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now →</a>
+                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now</a>
             </div>
 
             <!-- Game Card 3 -->
-            <div class="game-card reveal-scale" data-tilt>
+            <div class="game-card">
                 <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://placehold.co/64x64/66ccff/0d0d1a?text=G3" alt="Game Icon" class="w-16 h-16 rounded-md neon-border" />
+                    <img src="https://placehold.co/64x64/ffc0cb/000?text=G3" alt="Game Icon" class="w-16 h-16 border-4 border-black" />
                     <div>
                         <h3 class="card-title text-2xl font-bold">Data Drive</h3>
-                        <p class="text-sm text-gray-400">Race through the network.</p>
+                        <p class="text-sm text-gray-700">Race through the network.</p>
                     </div>
                 </div>
                 <p>A high-speed racing game set inside a digital network. Avoid firewalls and hack the system.</p>
-                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now →</a>
+                <a href="#" class="card-link mt-4 inline-block font-bold">Play Now</a>
             </div>
         </section>
 
         <!-- Your original content boxes, now with animations -->
-        <div class="content-box reveal-up max-w-3xl mx-auto my-16 p-8 bg-gray-900 bg-opacity-75 rounded-xl border border-primary-neon shadow-lg hover:shadow-2xl transition-all duration-300" tabindex="0" data-tilt>
-            <h2 class="text-3xl neon-text font-bold mb-4">About A70M Web</h2>
+        <div class="retro-box max-w-3xl mx-auto my-16 p-8" tabindex="0">
+            <h2 class="text-3xl font-bold mb-4 text-black">About A70M Web</h2>
             <p>It's still in BETA though, so be patient...</p>
-            <a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer" class="card-link mt-4 inline-block font-bold">Join the Discord →</a>
+            <a href="https://discord.gg/r2pzbRv84N" target="_blank" rel="noopener noreferrer" class="card-link mt-4 inline-block font-bold">Join the Discord</a>
         </div>
 
-        <div class="content-box reveal-up max-w-3xl mx-auto my-16 p-8 bg-gray-900 bg-opacity-75 rounded-xl border border-secondary-neon shadow-lg hover:shadow-2xl transition-all duration-300" tabindex="0" data-tilt>
-            <h2 class="text-3xl neon-text font-bold mb-4">Check the Update Log!</h2>
-            <a href="#" class="card-link mt-4 inline-block font-bold">View Update Log →</a>
+        <div class="retro-box max-w-3xl mx-auto my-16 p-8" tabindex="0">
+            <h2 class="text-3xl font-bold mb-4 text-black">Check the Update Log!</h2>
+            <a href="#" class="card-link mt-4 inline-block font-bold">View Update Log</a>
         </div>
 
         <!-- Footer -->
-        <footer class="text-center text-gray-500 py-10 reveal-fade">
+        <footer class="text-center text-gray-700 py-10">
             <p>&copy; 2025 A70M Web. All Rights Reserved.</p>
         </footer>
     </div>
@@ -292,233 +287,53 @@
             const mainContent = document.getElementById('main-content');
             const terminalOutput = document.getElementById('terminal-output');
             const commands = [
-                "Initializing System... ✅",
-                "Loading kernel 'v3.1.4'... Done.",
-                "Mounting virtual filesystem... Complete.",
-                "Running security checks... OK.",
-                "Establishing encrypted connection to server... Connected.",
-                "Access Granted. Welcome, user. 👋"
+                "MS-DOS 6.22 starting...",
+                "Searching for dial-up connection...",
+                "Web portal established @ 28.8kbps.",
+                "Initializing GUI...",
+                "Welcome to the internet. Please hold on.",
+                "Loading website. Please wait..."
             ];
             let commandIndex = 0;
             let charIndex = 0;
 
             function typeCommand() {
                 if (commandIndex < commands.length) {
-                    if (charIndex < commands[commandIndex].length) {
-                        terminalOutput.textContent += commands[commandIndex].charAt(charIndex);
+                    const currentCommand = commands[commandIndex];
+                    if (charIndex < currentCommand.length) {
+                        terminalOutput.textContent += currentCommand.charAt(charIndex);
                         charIndex++;
-                        setTimeout(typeCommand, 50); // Typing speed
+                        setTimeout(typeCommand, 15); // Faster typing speed
                     } else {
                         terminalOutput.textContent += '\n';
                         commandIndex++;
                         charIndex = 0;
-                        setTimeout(typeCommand, 800); // Delay before next line
+                        setTimeout(typeCommand, 200); // Shorter delay before next line
                     }
                 } else {
                     // All commands typed, show content
                     setTimeout(() => {
-                        gsap.to(bootScreen, { opacity: 0, duration: 1, onComplete: () => {
+                        bootScreen.style.opacity = '0';
+                        setTimeout(() => {
                             bootScreen.style.display = 'none';
-                            mainContent.classList.remove('hidden');
-                            gsap.to(mainContent, { opacity: 1, duration: 1, ease: "power2.inOut" });
-                            initAnimations(); // Initialize other animations after boot
-                        }});
-                    }, 1000);
+                            mainContent.style.display = 'block';
+                            mainContent.style.opacity = '1';
+                        }, 1000);
+                    }, 500);
                 }
             }
             // Start the boot screen animation
             typeCommand();
 
 
-            // --- Interactive Canvas Background ---
-            const canvas = document.getElementById("bg-canvas");
-            const ctx = canvas.getContext("2d");
-            let fontSize = 16;
-            let columns;
-            let drops;
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{};:'\"\\|,.<>/?".split("");
-            const backgroundModes = ['matrix', 'starscape', 'cybergrid'];
-            let currentBgMode = 'matrix';
-            const bgToggleBtn = document.getElementById('bg-toggle');
-            let mouseX = -100, mouseY = -100;
-            const interactiveRadius = 150;
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                columns = Math.floor(canvas.width / fontSize);
-                drops = new Array(columns).fill(1);
-            }
-
-            function drawMatrix() {
-                if (currentBgMode !== 'matrix') return;
-                ctx.fillStyle = "rgba(13, 13, 26, 0.05)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.font = fontSize + "px 'Roboto Mono', monospace";
-
-                for (let i = 0; i < drops.length; i++) {
-                    const x = i * fontSize;
-                    const y = drops[i] * fontSize;
-
-                    // Interaction based on mouse position
-                    const dist = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
-                    if (dist < interactiveRadius) {
-                        const alpha = 1 - (dist / interactiveRadius);
-                        ctx.fillStyle = `rgba(51, 255, 204, ${alpha})`;
-                        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], x, y);
-                    } else {
-                        ctx.fillStyle = "#0F0";
-                        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], x, y);
-                    }
-
-                    if (y > canvas.height && Math.random() > 0.975) {
-                        drops[i] = 0;
-                    }
-                    drops[i]++;
-                }
-            }
-
-            function drawStarscape() {
-                if (currentBgMode !== 'starscape') return;
-                ctx.fillStyle = "rgba(13, 13, 26, 0.05)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                // Simple starfield logic
-                for (let i = 0; i < 50; i++) {
-                    const x = Math.random() * canvas.width;
-                    const y = Math.random() * canvas.height;
-                    const size = Math.random() * 2;
-                    const opacity = Math.random();
-                    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-                    ctx.beginPath();
-                    ctx.arc(x, y, size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function drawCybergrid() {
-                if (currentBgMode !== 'cybergrid') return;
-                ctx.fillStyle = "rgba(13, 13, 26, 0.05)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.strokeStyle = "rgba(51, 255, 204, 0.2)";
-                ctx.lineWidth = 1;
-                const gridSize = 50;
-                for (let i = 0; i < canvas.width; i += gridSize) {
-                    ctx.beginPath();
-                    ctx.moveTo(i, 0);
-                    ctx.lineTo(i, canvas.height);
-                    ctx.stroke();
-                }
-                for (let i = 0; i < canvas.height; i += gridSize) {
-                    ctx.beginPath();
-                    ctx.moveTo(0, i);
-                    ctx.lineTo(canvas.width, i);
-                    ctx.stroke();
-                }
-            }
-
-            function animateBackground() {
-                if (currentBgMode === 'matrix') {
-                    drawMatrix();
-                } else if (currentBgMode === 'starscape') {
-                    drawStarscape();
-                } else if (currentBgMode === 'cybergrid') {
-                    drawCybergrid();
-                }
-                requestAnimationFrame(animateBackground);
-            }
-
-            canvas.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            bgToggleBtn.addEventListener('click', () => {
-                const currentIndex = backgroundModes.indexOf(currentBgMode);
-                currentBgMode = backgroundModes[(currentIndex + 1) % backgroundModes.length];
-                console.log(`Background toggled to: ${currentBgMode}`);
-            });
-
-            resizeCanvas();
-            window.addEventListener("resize", resizeCanvas);
-            animateBackground();
-
-            // --- Scroll-triggered Animations & Interactions ---
-            function initAnimations() {
-                gsap.registerPlugin(ScrollTrigger);
-
-                // Header fade-in animation
-                gsap.from("header", { opacity: 0, duration: 1, y: -50, ease: "power2.out", delay: 0.5 });
-                gsap.from(".header-content", { opacity: 0, duration: 1, ease: "power2.out" });
-
-                // Animate sections on scroll
-                gsap.utils.toArray(".reveal-up").forEach(section => {
-                    gsap.from(section, {
-                        opacity: 0,
-                        y: 50,
-                        duration: 1.2,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none none"
-                        }
-                    });
-                });
-
-                gsap.utils.toArray(".reveal-scale").forEach(section => {
-                    gsap.from(section, {
-                        opacity: 0,
-                        scale: 0.9,
-                        duration: 1.2,
-                        ease: "back.out(1.7)",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none none"
-                        }
-                    });
-                });
-
-                // Vanilla-Tilt initialization
-                VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                    max: 10,
-                    speed: 400,
-                    glare: true,
-                    "max-glare": 0.5,
-                });
-            }
-
-            // --- Hacker Rank Easter Egg ---
+            // --- Hacker Rank / Score Easter Egg ---
             const hackerRank = document.getElementById('hacker-rank');
-            const ranks = ['Rookie', 'Coder', 'Elite', 'SysAdmin', 'Ghost'];
+            const ranks = ['Newbie', 'Player', 'High-Scorer', 'Game Master', 'Legend'];
             let rankIndex = 0;
             hackerRank.addEventListener('click', () => {
                 rankIndex = (rankIndex + 1) % ranks.length;
                 hackerRank.textContent = `Rank: ${ranks[rankIndex]}`;
-                // Optional: Play a sound or trigger a small animation here
             });
-
-
-            // --- Maintenance banner close button ---
-            const banner = document.getElementById('maintenance-banner');
-            const closeBtn = document.getElementById('closeBannerBtn');
-
-            closeBtn.addEventListener('click', () => {
-                gsap.to(banner, {
-                    y: "-100%",
-                    opacity: 0,
-                    duration: 0.4,
-                    onComplete: () => {
-                        banner.remove();
-                        document.querySelector('header').style.top = '0';
-                    }
-                });
-            });
-            // Show the banner after a short delay
-            setTimeout(() => {
-                banner.classList.remove('hidden');
-                gsap.from(banner, { y: "-100%", opacity: 0, duration: 0.5 });
-            }, 3000);
         });
     </script>
 </body>
