@@ -4,109 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found</title>
-    <link rel="icon" type="image/x-icon" href="/assets/Ethan.png">
+    <!-- Using Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
+        /* Custom CSS to handle the boxy and animated effects */
+        .y2k-box {
+            border: 6px solid #000; /* Thick black border */
+            box-shadow: 6px 6px 0px #333; /* Y2K-style drop shadow */
         }
-        #canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
+        .y2k-button {
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #333;
+            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
         }
-        #centerText {
-            font-size: 10vw;
-            text-align: center;
-            position: relative;
-            animation: glitch 1s infinite alternate;
+        .y2k-button:hover {
+            transform: translate(2px, 2px); /* Simulate a 'squash' effect */
+            box-shadow: 2px 2px 0px #333;
         }
-        #glitch {
-            display: inline-block;
-            position: relative;
-        }
-        #link {
-            margin-top: 20px;
-            font-size: 2vw;
-            color: #00ff00;
-            text-decoration: none;
-            transition: color 0.3s;
-            border: 2px solid #00ff00;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        #link:hover {
-            color: #000000;
-            background-color: #00ff00;
-        }
-        @keyframes glitch {
-            0% { text-shadow: 5px 0 #ff0000, -5px 0 #0000ff; }
-            100% { text-shadow: -5px 0 #ff0000, 5px 0 #0000ff; }
+        /* Accessibility for users who prefer reduced motion */
+        @media (prefers-reduced-motion) {
+            .y2k-button {
+                transition: none;
+                transform: none;
+                box-shadow: 4px 4px 0px #333;
+            }
         }
     </style>
 </head>
-<body>
-    <canvas id="canvas"></canvas>
-    <div id="centerText">
-        <span id="glitch">404</span>
+<body class="bg-sky-200 font-['Inter'] flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main container for the 404 message -->
+    <div class="y2k-box bg-[#ffc0cb] text-black w-full max-w-xl p-8 md:p-12 text-center rounded-2xl">
+        
+        <!-- The big, attention-grabbing 404 title -->
+        <h1 class="text-6xl md:text-9xl font-bold mb-4">404</h1>
+        
+        <!-- Descriptive text for the error -->
+        <p class="text-xl md:text-2xl mb-8">
+            <span class="font-bold">Error:</span> The page you're looking for cannot be found.
+        </p>
+
+        <!-- A nostalgic, boxy button to go back home -->
+        <a href="/" class="y2k-button inline-block bg-sky-300 text-black py-3 px-8 rounded-lg font-bold text-lg md:text-xl transition-all duration-200">
+            Go Back Home
+        </a>
+
     </div>
-    <a id="link" href="/">Go Back Home</a>
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const fontSize = 20;
-        const columns = Math.floor(canvas.width / fontSize);
-        const drops = Array(columns).fill(0);
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+=-{}[]|:;"<>,.?/~`';
-
-        function drawMatrixRain() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff00';
-            ctx.font = `${fontSize}px 'Courier New'`;
-
-            for (let i = 0; i < drops.length; i++) {
-                const char = characters[Math.floor(Math.random() * characters.length)];
-                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrixRain, 50);
-
-        function glitchEffect() {
-            const glitch = document.getElementById('glitch');
-            const originalText = '404';
-            const randomChar = characters[Math.floor(Math.random() * characters.length)];
-            glitch.textContent = originalText.slice(0, Math.floor(Math.random() * 3)) + randomChar + originalText.slice(Math.floor(Math.random() * 3) + 1);
-            setTimeout(() => {
-                glitch.textContent = originalText;
-            }, 100);
-            setTimeout(glitchEffect, Math.random() * 2000 + 1000);
-        }
-        glitchEffect();
-    </script>
 </body>
 </html>
