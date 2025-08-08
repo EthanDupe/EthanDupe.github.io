@@ -132,7 +132,7 @@
   
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      fetch('https://api.github.com/repos/EthanDupe/EthanDupe.github.io/releases')
+      fetch('https://api.github.com/repos/EthanDupe/EthanDupe.github.io/version.json')
         .then(response => response.json())
         .then(releases => {
           if (releases.length > 0) {
