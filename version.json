@@ -1,8 +1,7 @@
 {
-    "version": "1.4",
-    "release_date": "2025-02-07",
+    "version": "2.0",
+    "release_date": "2025-08-07",
     "changes": {
-        "Added back games"
-        "Added settings Page"
+       "v.1 decapricated"
     }
 }
